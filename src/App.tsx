@@ -146,8 +146,7 @@ export default function App() {
       <div className="grid gap-px" style={{ gridTemplateColumns: "minmax(0, 1fr) 360px", background: "var(--border)" }}>
         <main style={{ background: "var(--background)" }}>
           <div className="border-b p-4" style={{ borderColor: "var(--border)" }}>
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}
-              placeholder={T.searchPH}
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={T.searchPH}
               className="w-full rounded-sm border bg-transparent px-3 py-2 font-mono text-sm outline-none"
               style={{ borderColor: "var(--border)" }} />
             {(tagFilter || dayFilter || filter !== "all") ? (
@@ -160,8 +159,7 @@ export default function App() {
           <TaskList T={T} lang={lang} tasks={tasksStore.tasks} filter={filter} search={search}
             tagFilter={tagFilter} dayFilter={dayFilter} onEdit={openEdit}
             onToggleDone={(t) => tasksStore.upsert({ ...t, status: t.status === "feta" ? "pendent" : "feta" })}
-            onDelete={(t) => tasksStore.remove(t.id)}
-            onReorder={tasksStore.reorder}
+            onDelete={(t) => tasksStore.remove(t.id)} onReorder={tasksStore.reorder}
             onFilterTag={(tg) => setTagFilter(tagFilter === tg ? null : tg)} />
         </main>
 
@@ -182,8 +180,7 @@ export default function App() {
             managing={managingTags} setManaging={setManagingTags}
             onDeleteTag={(tg) => {
               tasksStore.replaceAll(tasksStore.tasks.map((t) => ({
-                ...t,
-                tag: splitTags(t.tag).filter((x) => x.toLowerCase() !== tg.toLowerCase()).join("; "),
+                ...t, tag: splitTags(t.tag).filter((x) => x.toLowerCase() !== tg.toLowerCase()).join("; "),
               })));
               if (tagFilter === tg) setTagFilter(null);
             }} />
@@ -195,7 +192,8 @@ export default function App() {
         <TaskModal T={T} task={editing} siblings={siblings}
           onClose={() => { setModal(null); setEditing(null); }}
           onSave={(main, extras) => {
-            if (editing) tasksStore.upsert(main); else tasksStore.append([main]);
+            if (editing) tasksStore.upsert(main);
+            else tasksStore.append([main]);
             if (extras.length) tasksStore.append(extras);
           }}
           onDelete={(id) => tasksStore.remove(id)}
