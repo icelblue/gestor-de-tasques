@@ -4,6 +4,11 @@ A minimalist, high-performance task management web application. Built with a sle
 
 **Live Demo:** [https://taskmantool.vercel.app/](https://taskmantool.vercel.app/)
 
+## 📸 Screenshots
+
+![Main Dashboard](./screenshots/dashboard.jpg)
+![Main Dashboard](./screenshots/create.jpg)
+
 ## ✨ Key Features
 
 *   **Task Management:** Quick entry, editing, and deletion of daily tasks.
