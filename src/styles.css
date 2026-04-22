@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap");
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================================================
+   GT · Gestor de Tasques — Design System (paritat amb HTML original)
+   Tipografies: Bebas Neue (títols), IBM Plex Mono (mono), IBM Plex Sans (body)
+   Paleta: brutalist dark amb accent ocre (HSL exacte de l'HTML original)
+   ======================================================================== */
+
+
+@theme inline {
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-text-faint: var(--text-faint);
+  --color-urgent: var(--urgent);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-done: var(--done);
+
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-title: "Bebas Neue", "Impact", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* HSL raw tokens — exactament com el HTML original.
+   Sufix _h per evitar col·lisió amb els alias resolts a sota. */
+:root, html, .dark {
+  --bg_h: 20 7% 5%;
+  --fg_h: 40 25% 88%;
+  --surface_h: 40 7% 10%;
+  --surface2_h: 40 4% 13%;
+  --surface3_h: 40 4% 17%;
+  --border_h: 40 7% 21%;
+  --border2_h: 40 5% 27%;
+  --primary_h: 38 60% 55%;
+  --primary-fg_h: 20 7% 5%;
+  --accent2_h: 38 60% 46%;
+  --text-faint_h: 35 8% 31%;
+  --muted-fg_h: 35 10% 50%;
+  --done_h: 140 25% 39%;
+  --done-bg_h: 150 28% 14%;
+  --urgent_h: 0 56% 52%;
+  --urgent-bg_h: 0 28% 14%;
+  --warning_h: 28 60% 49%;
+  --warning-bg_h: 28 30% 12%;
+  --info_h: 207 35% 47%;
+  --info-bg_h: 210 30% 15%;
+  --destructive_h: 0 60% 52%;
+  --modal-bg_h: 20 10% 4%;
+  --drag-over_h: 40 5% 15%;
+
+  --radius: 3px;
+}
+
+/* Alias resolts (CSS variables planes utilitzades pels components) */
+:root, html, .dark {
+  --background: hsl(var(--bg_h));
+  --foreground: hsl(var(--fg_h));
+  --surface: hsl(var(--surface_h));
+  --surface-2: hsl(var(--surface2_h));
+  --surface-3: hsl(var(--surface3_h));
+  --border: hsl(var(--border_h));
+  --border-2: hsl(var(--border2_h));
+  --input: hsl(var(--border_h));
+  --ring: hsl(var(--primary_h));
+  --primary: hsl(var(--primary_h));
+  --primary-foreground: hsl(var(--primary-fg_h));
+  --secondary: hsl(var(--surface2_h));
+  --secondary-foreground: hsl(var(--fg_h));
+  --muted: hsl(var(--surface2_h));
+  --muted-foreground: hsl(var(--muted-fg_h));
+  --accent: hsl(var(--surface3_h));
+  --accent-foreground: hsl(var(--fg_h));
+  --destructive: hsl(var(--destructive_h));
+  --destructive-foreground: hsl(var(--fg_h));
+  --card: hsl(var(--surface_h));
+  --card-foreground: hsl(var(--fg_h));
+  --popover: hsl(var(--surface_h));
+  --popover-foreground: hsl(var(--fg_h));
+  --text-faint: hsl(var(--text-faint_h));
+  --urgent: hsl(var(--urgent_h));
+  --urgent-bg: hsl(var(--urgent-bg_h));
+  --warning: hsl(var(--warning_h));
+  --warning-bg: hsl(var(--warning-bg_h));
+  --info: hsl(var(--info_h));
+  --info-bg: hsl(var(--info-bg_h));
+  --done: hsl(var(--done_h));
+  --done-bg: hsl(var(--done-bg_h));
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .font-display, .font-title {
+    font-family: var(--font-title);
+    letter-spacing: 0.05em;
+  }
+  .font-mono { font-family: var(--font-mono); }
+  .font-body { font-family: var(--font-body); }
+}
+
+/* Scrollbars — fins, com l'original */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 10px; }
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: var(--background); }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 10px; }
+}
+
+/* Animacions originals */
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-urgent { animation: pulse-urgent 1.5s ease-in-out infinite; }
+
+@keyframes modal-in {
+  from { transform: translateY(8px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.animate-modal-in { animation: modal-in .2s ease-out; }
+
+@keyframes slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up { animation: slide-up .2s ease-out; }
+
+/* Rich notes editor */
+.rich-notes:empty::before,
+.rich-notes:has(> br:only-child)::before {
+  content: attr(data-placeholder);
+  color: var(--text-faint);
+  pointer-events: none;
+}
+.rich-notes img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Help modal styling — coincideix amb l'original */
+.help-section {
+  border-left: 2px solid var(--primary);
+  padding: 4px 0 4px 14px;
+}
+.help-section h3 {
+  font-family: var(--font-title);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.help-tip {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+.help-tip strong { color: var(--foreground); }
+.help-tip code {
+  font-family: var(--font-mono);
+  background: var(--surface-3);
+  padding: 1px 6px;
+  border-radius: 2px;
+  color: var(--primary);
+  font-size: 11px;
+}
+.shortcut-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-2);
+  border-radius: 3px;
+  padding: 2px 8px;
+  color: var(--foreground);
+  white-space: nowrap;
+}
+.help-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
