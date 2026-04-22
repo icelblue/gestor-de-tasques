@@ -3,369 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GT-Gestor de tasques</title>
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAZ0lEQVR4nGO4ssL5/0BihlEHSElJ/B9IPOqAwe0AaiW0UQeMOoCquYASy0YdMOqAUQeMOmDoOOCkgwMcjzoAxLeyMj1BDB6+DhjwKKCpA2CAXg5Atw/DclpjdPuwWk5JkFIlDdDTAQDx7gNvQtUB0AAAAABJRU5ErkJggg==">
-<link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAA6klEQVR4nO3WsQ3CMBBGYY+BsgFFSppUkViWARgCevZxRAlyYsdO/MvnF+lVFtbdhxTFfR5333NOPYA6ANQDqHPfZxgu3mqx/UwvnwSkHkAdAOoB1AGgHkAdALk/VH/A/AcAAAAAAAAAANQDOBus1lwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIR6z/NPAAAAgJ+m2+vIAAAAgLYA9mTyJdg9wDhenzkBAECDAKU1/w4wCxB6UhaoNeAZC66e7/kH1YvlAGyexy5qHWDzPOWiEMDRn8JrlQJEgboGSL2oVYAoEAAFABZaALMzSvpQqtjBAAAAAElFTkSuQmCC">
-<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAAB7ElEQVR4nO3awU3DQBCG0ZSB0gGHHLnkFIlmKYAi4E4/QTSAnLUzO/b/LH3HlUaed7L39PPxfldup9kDCAABIAAEgABQNYC/53x+uWvfje4RgIMEQHjDAGYPrrkBEB4A4QEQHgDhARAeAOEBEB4A4QEQHgDhARBeGYDZ/733FgDhARAeAOEBEB4A4QEQHgDhARAeAOEBEB4A4QEQHgDhARAeAOEdDkB1e11IdQAAMH8IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgWwDft9u/AdAzAAAAAAAAAKgCcL2+fXUKAAAAAAAAAAAAAAAAAAAAgKcCqMp3AAAA6Ajgcnn9fGYAAAAAAAAAAAAAADQEUBUAAAAAAAAAAFADoFsAAABAJYBuLxAAAAAAAAAAAOgFYPYNoLXNXhgAAAAAAAAAAAAAAACsB7D0AaA3gNE9rlr6CADVAxg69+gAAPQE8PC50QGWAnj2ncCldwaP1ugeN1k+APMb3SMAB2k1gLUDANADwNC5LQYAYD6AYTiVAASAOgHYagAA9hkA4R32WrgA0IJ+AUyixqLIjLNBAAAAAElFTkSuQmCC">
+<title>GT · Gestor de Tasques</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%230f0f0e'/><text y='48' x='5' font-size='50' font-family='Georgia,serif' font-weight='bold' fill='%23d4a843'>GT</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f0f0e;
-    --surface: #1a1a18;
-    --surface2: #232320;
-    --surface3: #2d2d29;
-    --border: #3a3a35;
-    --border2: #4a4a44;
-    --text: #e8e4d8;
-    --text-muted: #8a8578;
-    --text-faint: #555248;
-    --accent: #d4a843;
-    --accent2: #b8922e;
-    --done: #4a7c59;
-    --done-bg: #1a2e21;
-    --urgent: #c94040;
-    --urgent-bg: #2e1a1a;
-    --warning: #c97d30;
-    --warning-bg: #2e2010;
-    --info: #4a7ca8;
-    --info-bg: #1a2535;
-    --drag-over: #2a2a25;
-    --modal-bg: rgba(10,10,9,0.92);
-    --radius: 3px;
-    --font-title: 'Bebas Neue', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
-    --font-body: 'IBM Plex Sans', sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+:root{--bg:#0f0f0e;--surface:#1a1a18;--surface2:#232320;--surface3:#2d2d29;--border:#3a3a35;--border2:#4a4a44;--text:#e8e4d8;--text-muted:#8a8578;--text-faint:#555248;--accent:#d4a843;--accent2:#b8922e;--done:#4a7c59;--done-bg:#1a2e21;--urgent:#c94040;--urgent-bg:#2e1a1a;--warning:#c97d30;--warning-bg:#2e2010;--info:#4a7ca8;--info-bg:#1a2535;--drag-over:#2a2a25;--modal-bg:rgba(10,10,9,0.92);--radius:3px;--font-title:'Bebas Neue',sans-serif;--font-mono:'IBM Plex Mono',monospace;--font-body:'IBM Plex Sans',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;min-height:100vh;overflow-x:hidden}
 
-  /* ── BANNER ─────────────────────────────── */
-  #ls-banner {
-    background: var(--info-bg); border-bottom: 1px solid var(--info);
-    padding: 8px 24px; display: flex; align-items: center; gap: 12px;
-    font-family: var(--font-mono); font-size: 11px; color: #7ab4d8; flex-wrap: wrap;
-  }
-  #ls-banner strong { color: var(--text); }
-  #ls-banner a { color: var(--accent); cursor: pointer; text-decoration: underline; }
-  .banner-actions { display: flex; gap: 8px; margin-left: auto; flex-shrink: 0; }
-  .banner-btn { background: none; border: 1px solid var(--info); color: #7ab4d8; padding: 3px 10px; font-family: var(--font-mono); font-size: 10px; border-radius: var(--radius); cursor: pointer; transition: all .15s; white-space: nowrap; }
-  .banner-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .banner-close { background: none; border: none; color: var(--text-faint); cursor: pointer; font-size: 16px; padding: 0 4px; transition: color .15s; }
-  .banner-close:hover { color: var(--text); }
+/* LANG BAR */
+#lang-bar{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:5px 28px;background:var(--surface);border-bottom:1px solid var(--border)}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--text-faint);padding:3px 12px;font-family:var(--font-mono);font-size:10px;letter-spacing:1px;border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lang-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
 
-  /* ── HEADER ─────────────────────────────── */
-  #header { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px 14px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; gap: 14px; flex-wrap: wrap; }
-  #header h1 { font-family: var(--font-title); font-size: 36px; letter-spacing: 6px; color: var(--accent); line-height: 1; }
-  #header .subtitle { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); letter-spacing: 2px; margin-top: 2px; }
-  #stats { display: flex; gap: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
-  #stats span { display: flex; flex-direction: column; align-items: center; gap: 1px; }
-  #stats .num { font-size: 22px; font-weight: 600; color: var(--text); line-height: 1; }
-  #stats .num.urgent { color: var(--urgent); }
-  #stats .num.done-c { color: var(--done); }
-  #header-btns { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  #btn-new { background: var(--accent); color: var(--bg); border: none; padding: 10px 22px; font-family: var(--font-title); font-size: 20px; letter-spacing: 3px; cursor: pointer; border-radius: var(--radius); transition: background .15s, transform .1s; }
-  #btn-new:hover { background: var(--accent2); transform: translateY(-1px); }
-  .icon-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); padding: 8px 12px; cursor: pointer; border-radius: var(--radius); font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; transition: all .15s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
-  .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* BANNER */
+#ls-banner{background:var(--info-bg);border-bottom:1px solid var(--info);padding:8px 24px;display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11px;color:#7ab4d8;flex-wrap:wrap}
+#ls-banner strong{color:var(--text)}
+#ls-banner a{color:var(--accent);cursor:pointer;text-decoration:underline}
+.banner-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0}
+.banner-btn{background:none;border:1px solid var(--info);color:#7ab4d8;padding:3px 10px;font-family:var(--font-mono);font-size:10px;border-radius:var(--radius);cursor:pointer;transition:all .15s;white-space:nowrap}
+.banner-btn:hover{border-color:var(--accent);color:var(--accent)}
+.banner-close{background:none;border:none;color:var(--text-faint);cursor:pointer;font-size:16px;padding:0 4px;transition:color .15s}
+.banner-close:hover{color:var(--text)}
 
-  /* ── TOOLBAR ─────────────────────────────── */
-  #toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 28px; background: var(--surface); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-  .filter-btn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; padding: 5px 12px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; border-radius: var(--radius); transition: all .15s; text-transform: uppercase; }
-  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
-  #search { margin-left: auto; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; font-family: var(--font-mono); font-size: 11px; border-radius: var(--radius); width: 200px; outline: none; transition: border .15s; }
-  #search:focus { border-color: var(--accent); }
-  #search::placeholder { color: var(--text-faint); }
+/* HEADER */
+#header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px 14px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:100;gap:14px;flex-wrap:wrap}
+#header h1{font-family:var(--font-title);font-size:36px;letter-spacing:6px;color:var(--accent);line-height:1}
+#header .subtitle{font-family:var(--font-mono);font-size:10px;color:var(--text-faint);letter-spacing:2px;margin-top:2px}
+#stats{display:flex;gap:18px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+#stats span{display:flex;flex-direction:column;align-items:center;gap:1px}
+#stats .num{font-size:22px;font-weight:600;color:var(--text);line-height:1}
+#stats .num.urgent{color:var(--urgent)}
+#stats .num.done-c{color:var(--done)}
+#header-btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#btn-new{background:var(--accent);color:var(--bg);border:none;padding:10px 22px;font-family:var(--font-title);font-size:20px;letter-spacing:3px;cursor:pointer;border-radius:var(--radius);transition:background .15s,transform .1s}
+#btn-new:hover{background:var(--accent2);transform:translateY(-1px)}
+.icon-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:8px 12px;cursor:pointer;border-radius:var(--radius);font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-  /* ── LIST ────────────────────────────────── */
-  #task-list { padding: 20px 28px; display: flex; flex-direction: column; gap: 6px; max-width: 900px; margin: 0 auto; }
-  .task-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: grid; grid-template-columns: 28px 6px 1fr auto auto; align-items: center; gap: 0; cursor: pointer; transition: border-color .15s, background .15s; position: relative; overflow: hidden; min-height: 58px; user-select: none; }
-  .task-item:hover { border-color: var(--border2); background: var(--surface2); }
-  .task-item.dragging { opacity: .5; box-shadow: 0 8px 32px rgba(0,0,0,.6); }
-  .task-item.drag-over { background: var(--drag-over); border-color: var(--accent); }
-  .task-item.done-task { opacity: .6; }
-  .task-item.done-task .task-name { text-decoration: line-through; color: var(--text-muted); }
-  .task-item .stripe { width: 6px; align-self: stretch; }
-  .pri-1 .stripe { background: var(--urgent); }
-  .pri-2 .stripe { background: var(--warning); }
-  .pri-3 .stripe { background: var(--accent); }
-  .pri-4 .stripe { background: var(--border2); }
-  .pri-5 .stripe { background: var(--text-faint); }
-  .drag-handle { display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 14px; height: 100%; cursor: grab; padding: 0 4px; }
-  .drag-handle:active { cursor: grabbing; }
-  .task-main { padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .task-name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
-  .task-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .task-date { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
-  .task-date.urgent { color: var(--urgent) !important; font-weight: 600; animation: pulse 1.5s infinite; }
-  .task-date.warning { color: var(--warning) !important; }
-  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.5;} }
-  .task-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; padding: 1px 6px; border-radius: 2px; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-muted); }
-  .task-has-note { font-size: 10px; color: var(--text-faint); }
-  .task-actions { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; opacity: 0; transition: opacity .15s; }
-  .task-item:hover .task-actions { opacity: 1; }
-  .task-btn { background: none; border: 1px solid var(--border); color: var(--text-muted); width: 26px; height: 26px; border-radius: var(--radius); cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-  .task-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .task-btn.del:hover { border-color: var(--urgent); color: var(--urgent); }
-  .task-btn.check-btn.done { border-color: var(--done); color: var(--done); background: var(--done-bg); }
-  .task-check-wrap { display: flex; align-items: center; justify-content: center; padding: 0 10px; }
-  .pri-badge { font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: 1px; padding: 1px 5px; border-radius: 2px; }
-  .pri-badge.p1 { background: rgba(201,64,64,.2); color: var(--urgent); }
-  .pri-badge.p2 { background: rgba(201,125,48,.2); color: var(--warning); }
-  .pri-badge.p3 { background: rgba(212,168,67,.2); color: var(--accent); }
-  .pri-badge.p4 { background: var(--surface3); color: var(--text-muted); }
-  .pri-badge.p5 { background: transparent; color: var(--text-faint); border: 1px solid var(--text-faint); }
-  #empty-state { text-align: center; padding: 80px 20px; color: var(--text-faint); font-family: var(--font-mono); display: none; }
-  #empty-state .big { font-family: var(--font-title); font-size: 48px; letter-spacing: 8px; color: var(--border); }
+/* TOOLBAR */
+#toolbar{display:flex;align-items:center;gap:8px;padding:10px 28px;background:var(--surface);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.filter-btn{font-family:var(--font-mono);font-size:10px;letter-spacing:1px;padding:5px 12px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;border-radius:var(--radius);transition:all .15s;text-transform:uppercase}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.toolbar-sep{width:1px;height:20px;background:var(--border);margin:0 2px}
+#search{margin-left:auto;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:5px 12px;font-family:var(--font-mono);font-size:11px;border-radius:var(--radius);width:200px;outline:none;transition:border .15s}
+#search:focus{border-color:var(--accent)}
+#search::placeholder{color:var(--text-faint)}
 
-  /* ── MODALS ──────────────────────────────── */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: var(--modal-bg); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-  .modal-overlay.open { display: flex; }
-  .modal-box { background: var(--surface); border: 1px solid var(--border2); border-radius: 4px; max-width: 96vw; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,.8); animation: modal-in .2s ease; }
-  @keyframes modal-in { from{opacity:0;transform:translateY(12px) scale(.98);}to{opacity:1;transform:none;} }
-  .modal-header { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
-  .modal-header h2 { font-family: var(--font-title); font-size: 22px; letter-spacing: 3px; color: var(--accent); flex: 1; }
-  .modal-close { background: none; border: 1px solid var(--border); color: var(--text-muted); width: 30px; height: 30px; border-radius: var(--radius); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-  .modal-close:hover { border-color: var(--urgent); color: var(--urgent); }
-  .modal-body { padding: 20px 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; flex: 1; }
-  .modal-footer { padding: 14px 22px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+/* LIST */
+#task-list{padding:20px 28px;display:flex;flex-direction:column;gap:6px;max-width:900px;margin:0 auto}
+.task-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:28px 6px 1fr auto auto;align-items:center;gap:0;cursor:pointer;transition:border-color .15s,background .15s;position:relative;overflow:hidden;min-height:58px;user-select:none}
+.task-item:hover{border-color:var(--border2);background:var(--surface2)}
+.task-item.dragging{opacity:.5;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.task-item.drag-over{background:var(--drag-over);border-color:var(--accent)}
+.task-item.done-task{opacity:.6}
+.task-item.done-task .task-name{text-decoration:line-through;color:var(--text-muted)}
+.task-item .stripe{width:6px;align-self:stretch}
+.pri-1 .stripe{background:var(--urgent)}
+.pri-2 .stripe{background:var(--warning)}
+.pri-3 .stripe{background:var(--accent)}
+.pri-4 .stripe{background:var(--border2)}
+.pri-5 .stripe{background:var(--text-faint)}
+.drag-handle{display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:14px;height:100%;cursor:grab;padding:0 4px}
+.drag-handle:active{cursor:grabbing}
+.task-main{padding:10px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.task-name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.task-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.task-date{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.task-date.urgent{color:var(--urgent)!important;font-weight:600;animation:pulse 1.5s infinite}
+.task-date.warning{color:var(--warning)!important}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.task-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:2px;text-transform:uppercase;border:1px solid var(--border);color:var(--text-muted)}
+.task-has-note{font-size:10px;color:var(--text-faint)}
+.task-actions{display:flex;flex-direction:column;gap:2px;padding:6px 8px;opacity:0;transition:opacity .15s}
+.task-item:hover .task-actions{opacity:1}
+.task-btn{background:none;border:1px solid var(--border);color:var(--text-muted);width:26px;height:26px;border-radius:var(--radius);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.task-btn:hover{border-color:var(--accent);color:var(--accent)}
+.task-btn.del:hover{border-color:var(--urgent);color:var(--urgent)}
+.task-btn.check-btn.done{border-color:var(--done);color:var(--done);background:var(--done-bg)}
+.task-check-wrap{display:flex;align-items:center;justify-content:center;padding:0 10px}
+.pri-badge{font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:1px;padding:1px 5px;border-radius:2px}
+.pri-badge.p1{background:rgba(201,64,64,.2);color:var(--urgent)}
+.pri-badge.p2{background:rgba(201,125,48,.2);color:var(--warning)}
+.pri-badge.p3{background:rgba(212,168,67,.2);color:var(--accent)}
+.pri-badge.p4{background:var(--surface3);color:var(--text-muted)}
+.pri-badge.p5{background:transparent;color:var(--text-faint);border:1px solid var(--text-faint)}
+#empty-state{text-align:center;padding:80px 20px;color:var(--text-faint);font-family:var(--font-mono);display:none}
+#empty-state .big{font-family:var(--font-title);font-size:48px;letter-spacing:8px;color:var(--border)}
 
-  /* TASK modal */
-  #modal { width: 680px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
-  .field-group { display: flex; flex-direction: column; gap: 5px; }
-  .field-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-faint); text-transform: uppercase; }
-  .field-input, .field-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; font-family: var(--font-body); font-size: 13px; border-radius: var(--radius); outline: none; transition: border .15s; width: 100%; }
-  .field-input:focus, .field-select:focus { border-color: var(--accent); }
-  .field-select option { background: var(--surface2); }
-  #notes-area { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); min-height: 140px; padding: 10px 12px; color: var(--text); font-family: var(--font-body); font-size: 13px; line-height: 1.6; outline: none; cursor: text; overflow-y: auto; transition: border .15s; }
-  #notes-area:focus { border-color: var(--accent); }
-  #notes-area:empty:before { content: attr(data-placeholder); color: var(--text-faint); pointer-events: none; }
-  #notes-area img { max-width: 100%; border-radius: 2px; margin: 6px 0; display: block; cursor: pointer; }
-  .notes-toolbar { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
-  .notes-tool { background: var(--surface3); border: 1px solid var(--border); color: var(--text-muted); padding: 3px 8px; font-size: 11px; font-family: var(--font-mono); border-radius: var(--radius); cursor: pointer; transition: all .15s; }
-  .notes-tool:hover { border-color: var(--accent); color: var(--accent); }
-  .notes-tool input[type=file] { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
-  .paste-hint { font-family: var(--font-mono); font-size: 9px; color: var(--text-faint); letter-spacing: 1px; margin-left: auto; }
-  .btn-primary { background: var(--accent); color: var(--bg); border: none; padding: 9px 24px; font-family: var(--font-title); font-size: 18px; letter-spacing: 2px; cursor: pointer; border-radius: var(--radius); transition: background .15s; }
-  .btn-primary:hover { background: var(--accent2); }
-  .btn-secondary { background: none; color: var(--text-muted); border: 1px solid var(--border); padding: 9px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; cursor: pointer; border-radius: var(--radius); transition: all .15s; }
-  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
-  .btn-danger { background: none; color: var(--urgent); border: 1px solid var(--urgent); padding: 9px 20px; font-family: var(--font-mono); font-size: 11px; cursor: pointer; border-radius: var(--radius); margin-right: auto; transition: all .15s; }
-  .btn-danger:hover { background: var(--urgent); color: #fff; }
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:var(--modal-bg);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--surface);border:1px solid var(--border2);border-radius:4px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.8);animation:modal-in .2s ease}
+@keyframes modal-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.modal-header{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.modal-header h2{font-family:var(--font-title);font-size:22px;letter-spacing:3px;color:var(--accent);flex:1}
+.modal-close{background:none;border:1px solid var(--border);color:var(--text-muted);width:30px;height:30px;border-radius:var(--radius);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.modal-close:hover{border-color:var(--urgent);color:var(--urgent)}
+.modal-body{padding:20px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;flex:1}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+#modal{width:680px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field-row.triple{grid-template-columns:1fr 1fr 1fr}
+.field-group{display:flex;flex-direction:column;gap:5px}
+.field-label{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--text-faint);text-transform:uppercase}
+.field-input,.field-select{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;font-family:var(--font-body);font-size:13px;border-radius:var(--radius);outline:none;transition:border .15s;width:100%}
+.field-input:focus,.field-select:focus{border-color:var(--accent)}
+.field-select option{background:var(--surface2)}
+#notes-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);min-height:140px;padding:10px 12px;color:var(--text);font-family:var(--font-body);font-size:13px;line-height:1.6;outline:none;cursor:text;overflow-y:auto;transition:border .15s}
+#notes-area:focus{border-color:var(--accent)}
+#notes-area:empty:before{content:attr(data-placeholder);color:var(--text-faint);pointer-events:none}
+#notes-area img{max-width:100%;border-radius:2px;margin:6px 0;display:block;cursor:pointer}
+.notes-toolbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.notes-tool{background:var(--surface3);border:1px solid var(--border);color:var(--text-muted);padding:3px 8px;font-size:11px;font-family:var(--font-mono);border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.notes-tool:hover{border-color:var(--accent);color:var(--accent)}
+.paste-hint{font-family:var(--font-mono);font-size:9px;color:var(--text-faint);letter-spacing:1px;margin-left:auto}
+.btn-primary{background:var(--accent);color:var(--bg);border:none;padding:9px 24px;font-family:var(--font-title);font-size:18px;letter-spacing:2px;cursor:pointer;border-radius:var(--radius);transition:background .15s}
+.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:none;color:var(--text-muted);border:1px solid var(--border);padding:9px 20px;font-family:var(--font-mono);font-size:11px;letter-spacing:1px;cursor:pointer;border-radius:var(--radius);transition:all .15s}
+.btn-secondary:hover{border-color:var(--text-muted);color:var(--text)}
+.btn-danger{background:none;color:var(--urgent);border:1px solid var(--urgent);padding:9px 20px;font-family:var(--font-mono);font-size:11px;cursor:pointer;border-radius:var(--radius);margin-right:auto;transition:all .15s}
+.btn-danger:hover{background:var(--urgent);color:#fff}
 
-  /* IMPORT TXT modal */
-  #import-modal { width: 660px; }
-  .import-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
-  .import-tab { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 8px 18px; border: none; background: transparent; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s; }
-  .import-tab:hover { color: var(--accent); }
-  .import-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  #paste-area { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); min-height: 160px; padding: 12px 14px; color: var(--text); font-family: var(--font-mono); font-size: 12px; line-height: 1.7; outline: none; resize: vertical; width: 100%; transition: border .15s; }
-  #paste-area:focus { border-color: var(--accent); }
-  #paste-area::placeholder { color: var(--text-faint); }
-  .import-format-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; font-family: var(--font-mono); font-size: 11px; line-height: 1.9; color: var(--text-muted); }
-  .import-format-box .kw { color: var(--accent); }
-  .import-format-box .line-eg { color: var(--text); }
-  .import-format-box .comment { color: var(--text-faint); }
-  .import-drop-zone { border: 2px dashed var(--border2); border-radius: 4px; padding: 28px 20px; text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); cursor: pointer; transition: all .2s; position: relative; }
-  .import-drop-zone:hover, .import-drop-zone.dragover { border-color: var(--accent); color: var(--accent); background: rgba(212,168,67,.04); }
-  .import-drop-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .import-drop-zone .drop-icon { font-size: 28px; margin-bottom: 8px; }
-  .import-preview-list { display: flex; flex-direction: column; gap: 4px; max-height: 220px; overflow-y: auto; }
-  .import-preview-item { display: flex; align-items: center; gap: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 12px; font-size: 13px; }
-  .import-preview-item .ip-name { flex: 1; font-weight: 600; }
-  .import-preview-item .ip-meta { font-family: var(--font-mono); font-size: 9px; color: var(--text-faint); display: flex; gap: 8px; }
-  .import-preview-item .ip-err { color: var(--urgent); font-family: var(--font-mono); font-size: 10px; }
-  .import-preview-item.has-err { border-color: var(--urgent); opacity: .7; }
-  .import-count { color: var(--accent); font-weight: 600; }
-  .sec-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--text-faint); text-transform: uppercase; }
+/* IMPORT */
+#import-modal{width:660px}
+.import-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:16px}
+.import-tab{font-family:var(--font-mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.import-tab:hover{color:var(--accent)}
+.import-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+#paste-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);min-height:160px;padding:12px 14px;color:var(--text);font-family:var(--font-mono);font-size:12px;line-height:1.7;outline:none;resize:vertical;width:100%;transition:border .15s}
+#paste-area:focus{border-color:var(--accent)}
+#paste-area::placeholder{color:var(--text-faint)}
+.import-format-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;font-family:var(--font-mono);font-size:11px;line-height:1.9;color:var(--text-muted);display:flex;flex-direction:column}
+.import-format-box .kw{color:var(--accent)}
+.import-format-box .line-eg{color:var(--text)}
+.import-format-box .comment{color:var(--text-faint)}
+.import-drop-zone{border:2px dashed var(--border2);border-radius:4px;padding:28px 20px;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);cursor:pointer;transition:all .2s;position:relative;margin-top:10px}
+.import-drop-zone:hover,.import-drop-zone.dragover{border-color:var(--accent);color:var(--accent);background:rgba(212,168,67,.04)}
+.import-drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.import-drop-zone .drop-icon{font-size:28px;margin-bottom:8px}
+.import-preview-list{display:flex;flex-direction:column;gap:4px;max-height:220px;overflow-y:auto}
+.import-preview-item{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:7px 12px;font-size:13px}
+.import-preview-item .ip-name{flex:1;font-weight:600}
+.import-preview-item .ip-meta{font-family:var(--font-mono);font-size:9px;color:var(--text-faint);display:flex;gap:8px}
+.import-preview-item .ip-err{color:var(--urgent);font-family:var(--font-mono);font-size:10px}
+.import-preview-item.has-err{border-color:var(--urgent);opacity:.7}
+.import-count{color:var(--accent);font-weight:600}
+.sec-title{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--text-faint);text-transform:uppercase}
 
-  /* HELP modal */
-  #help-modal { width: 620px; }
-  .help-section { display: flex; flex-direction: column; gap: 10px; }
-  .help-section h3 { font-family: var(--font-title); font-size: 18px; letter-spacing: 2px; color: var(--accent); }
-  .shortcut-grid { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: center; }
-  .shortcut-key { font-family: var(--font-mono); font-size: 11px; background: var(--surface3); border: 1px solid var(--border2); border-radius: 3px; padding: 2px 8px; color: var(--text); white-space: nowrap; justify-self: start; }
-  .shortcut-desc { font-size: 13px; color: var(--text-muted); }
-  .help-tip { background: var(--surface2); border-left: 3px solid var(--accent); padding: 8px 14px; font-size: 12px; color: var(--text-muted); line-height: 1.6; border-radius: 0 var(--radius) var(--radius) 0; }
-  .help-tip strong { color: var(--text); }
-  .help-sep { height: 1px; background: var(--border); }
+/* HELP */
+#help-modal{width:620px}
+.help-section{display:flex;flex-direction:column;gap:10px}
+.help-section h3{font-family:var(--font-title);font-size:18px;letter-spacing:2px;color:var(--accent)}
+.shortcut-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center}
+.shortcut-key{font-family:var(--font-mono);font-size:11px;background:var(--surface3);border:1px solid var(--border2);border-radius:3px;padding:2px 8px;color:var(--text);white-space:nowrap;justify-self:start}
+.shortcut-desc{font-size:13px;color:var(--text-muted)}
+.help-tip{background:var(--surface2);border-left:3px solid var(--accent);padding:8px 14px;font-size:12px;color:var(--text-muted);line-height:1.6;border-radius:0 var(--radius) var(--radius) 0}
+.help-tip strong{color:var(--text)}
+.help-sep{height:1px;background:var(--border)}
 
-  /* BACKUP modal */
-  #backup-modal { width: 500px; }
-  .backup-option { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; cursor: pointer; transition: border-color .15s; text-align: left; width: 100%; }
-  .backup-option:hover { border-color: var(--accent); }
-  .backup-option .bo-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-  .backup-option .bo-title { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
-  .backup-option .bo-desc { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); line-height: 1.5; }
-  .backup-option.danger .bo-title { color: var(--urgent); }
-  .backup-option.danger:hover { border-color: var(--urgent); }
+/* BACKUP */
+#backup-modal{width:500px}
+.backup-option{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:border-color .15s;text-align:left;width:100%}
+.backup-option:hover{border-color:var(--accent)}
+.backup-option .bo-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.backup-option .bo-title{font-weight:600;font-size:14px;margin-bottom:3px}
+.backup-option .bo-desc{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.5}
+.backup-option.danger .bo-title{color:var(--urgent)}
+.backup-option.danger:hover{border-color:var(--urgent)}
 
-  /* TOAST */
-  #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--surface3); border: 1px solid var(--border2); border-radius: 4px; padding: 10px 20px; font-family: var(--font-mono); font-size: 12px; color: var(--text); z-index: 9999; transition: transform .3s ease; white-space: nowrap; box-shadow: 0 8px 32px rgba(0,0,0,.6); }
-  #toast.show { transform: translateX(-50%) translateY(0); }
-  #toast.success { border-color: var(--done); color: var(--done); }
-  #toast.error   { border-color: var(--urgent); color: var(--urgent); }
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface3);border:1px solid var(--border2);border-radius:4px;padding:10px 20px;font-family:var(--font-mono);font-size:12px;color:var(--text);z-index:9999;transition:transform .3s ease;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+#toast.success{border-color:var(--done);color:var(--done)}
+#toast.error{border-color:var(--urgent);color:var(--urgent)}
 
-  /* LIGHTBOX */
-  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 2000; align-items: center; justify-content: center; cursor: zoom-out; }
-  #lightbox.open { display: flex; }
-  #lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; }
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:2000;align-items:center;justify-content:center;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:92vw;max-height:92vh;object-fit:contain}
 
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 10px; }
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
 
-  @media(max-width:600px) {
-    #header { padding: 12px 16px; }
-    #header h1 { font-size: 26px; }
-    #task-list { padding: 12px 16px; }
-    #toolbar { padding: 8px 16px; }
-    .field-row, .field-row.triple { grid-template-columns: 1fr; }
-    #modal, #import-modal, #help-modal, #backup-modal { width: 98vw; }
-  }
+@media(max-width:600px){
+  #header{padding:12px 16px}
+  #header h1{font-size:26px}
+  #task-list{padding:12px 16px}
+  #toolbar{padding:8px 16px}
+  .field-row,.field-row.triple{grid-template-columns:1fr}
+  #modal,#import-modal,#help-modal,#backup-modal{width:98vw}
+}
 </style>
 </head>
 <body>
 
+<!-- LANG BAR -->
+<div id="lang-bar">
+  <button class="lang-btn active" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
 <!-- BANNER -->
 <div id="ls-banner">
   <span>💾</span>
-  <span><strong>Les dades es guarden al localStorage del navegador.</strong>
-  Si netegeu el cau del navegador les tasques es perdran.
-  <a onclick="openBackupModal()">Feu còpies de seguretat regularment →</a></span>
+  <span id="banner-text"></span>
   <div class="banner-actions">
-    <button class="banner-btn" onclick="exportJSON()">⬇ Exportar còpia ara</button>
-    <button class="banner-close" onclick="document.getElementById('ls-banner').remove()" title="Tancar">✕</button>
+    <button class="banner-btn" id="banner-export-btn" onclick="exportJSON()"></button>
+    <button class="banner-close" onclick="document.getElementById('ls-banner').remove()">✕</button>
   </div>
 </div>
 
 <!-- HEADER -->
 <div id="header">
   <div>
-    <h1>TASQUES</h1>
-    <div class="subtitle">GESTOR LOCAL · TOT AL NAVEGADOR</div>
+    <h1 id="app-title"></h1>
+    <div class="subtitle" id="app-subtitle"></div>
   </div>
   <div id="stats">
-    <span><span class="num" id="stat-total">0</span>total</span>
-    <span><span class="num urgent" id="stat-urgent">0</span>urgents</span>
-    <span><span class="num done-c" id="stat-done">0</span>fetes</span>
+    <span><span class="num" id="stat-total">0</span><span id="stat-total-lbl"></span></span>
+    <span><span class="num urgent" id="stat-urgent">0</span><span id="stat-urgent-lbl"></span></span>
+    <span><span class="num done-c" id="stat-done">0</span><span id="stat-done-lbl"></span></span>
   </div>
   <div id="header-btns">
-    <button class="icon-btn" onclick="openHelpModal()">? Ajuda</button>
-    <button class="icon-btn" onclick="openBackupModal()">💾 Còpia</button>
-    <button class="icon-btn" id="btn-import-txt">📂 Import .txt</button>
+    <button class="icon-btn" onclick="openHelpModal()" id="btn-help"></button>
+    <button class="icon-btn" onclick="openBackupModal()" id="btn-backup"></button>
+    <button class="icon-btn" id="btn-import-txt"></button>
     <input type="file" id="txt-upload" accept=".txt,text/plain" style="display:none">
-    <button id="btn-new">+ NOVA</button>
+    <button id="btn-new"></button>
   </div>
 </div>
 
 <!-- TOOLBAR -->
 <div id="toolbar">
-  <button class="filter-btn active" data-filter="all">Totes</button>
-  <button class="filter-btn" data-filter="pending">Pendents</button>
-  <button class="filter-btn" data-filter="done">Fetes</button>
-  <button class="filter-btn" data-filter="urgent">Urgents</button>
+  <button class="filter-btn active" data-filter="all" id="fb-all"></button>
+  <button class="filter-btn" data-filter="pending" id="fb-pending"></button>
+  <button class="filter-btn" data-filter="done" id="fb-done"></button>
+  <button class="filter-btn" data-filter="urgent" id="fb-urgent"></button>
   <div class="toolbar-sep"></div>
-  <button class="filter-btn" data-sort="priority">↕ Prioritat</button>
-  <button class="filter-btn" data-sort="date">📅 Data</button>
-  <button class="filter-btn" data-sort="name">Az Nom</button>
-  <input type="text" id="search" placeholder="Cerca...">
+  <button class="filter-btn" data-sort="priority" id="sb-priority"></button>
+  <button class="filter-btn" data-sort="date" id="sb-date"></button>
+  <button class="filter-btn" data-sort="name" id="sb-name"></button>
+  <input type="text" id="search">
 </div>
 
 <!-- TASK LIST -->
 <div id="task-list"></div>
 <div id="empty-state">
-  <div class="big">RES</div>
-  <div style="margin-top:12px;font-size:12px">Cap tasca. Prem <strong>+ NOVA</strong> o importa un <strong>.txt</strong></div>
+  <div class="big" id="empty-big"></div>
+  <div style="margin-top:12px;font-size:12px" id="empty-sub"></div>
 </div>
 
-<!-- ═══ MODAL TASCA ═══ -->
+<!-- MODAL TASCA -->
 <div id="modal-overlay" class="modal-overlay">
   <div id="modal" class="modal-box">
     <div class="modal-header">
-      <h2 id="modal-title">NOVA TASCA</h2>
-      <button class="modal-close" id="modal-close">✕</button>
+      <h2 id="modal-title"></h2>
+      <button class="modal-close" id="modal-close-btn">✕</button>
     </div>
     <div class="modal-body">
       <div class="field-group">
-        <label class="field-label">Nom de la tasca *</label>
-        <input type="text" id="f-name" class="field-input" placeholder="Descriu la tasca...">
+        <label class="field-label" id="lbl-name"></label>
+        <input type="text" id="f-name" class="field-input">
       </div>
       <div class="field-row triple">
         <div class="field-group">
-          <label class="field-label">Prioritat</label>
+          <label class="field-label" id="lbl-priority"></label>
           <select id="f-priority" class="field-select">
-            <option value="1">🔴 Crítica</option>
-            <option value="2">🟠 Alta</option>
-            <option value="3" selected>🟡 Normal</option>
-            <option value="4">🔵 Baixa</option>
-            <option value="5">⚪ Mínima</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3" selected></option>
+            <option value="4"></option>
+            <option value="5"></option>
           </select>
         </div>
         <div class="field-group">
-          <label class="field-label">Data límit</label>
+          <label class="field-label" id="lbl-date"></label>
           <input type="date" id="f-date" class="field-input">
         </div>
         <div class="field-group">
-          <label class="field-label">Estat</label>
+          <label class="field-label" id="lbl-status"></label>
           <select id="f-status" class="field-select">
-            <option value="pendent">⏳ Pendent</option>
-            <option value="feta">✅ Feta</option>
+            <option value="pendent"></option>
+            <option value="feta"></option>
           </select>
         </div>
       </div>
       <div class="field-group">
-        <label class="field-label">Etiqueta / Categoria</label>
-        <input type="text" id="f-tag" class="field-input" placeholder="ex: feina, personal, projecte...">
+        <label class="field-label" id="lbl-tag"></label>
+        <input type="text" id="f-tag" class="field-input">
       </div>
       <div class="field-group">
         <div class="notes-toolbar">
-          <label class="field-label" style="margin:0">Notes</label>
+          <label class="field-label" style="margin:0" id="lbl-notes"></label>
           <button class="notes-tool" onclick="formatDoc('bold')"><b>B</b></button>
           <button class="notes-tool" onclick="formatDoc('italic')"><i>I</i></button>
           <button class="notes-tool" onclick="formatDoc('underline')"><u>U</u></button>
-          <button class="notes-tool" onclick="insertBullet()">• Llista</button>
-          <label class="notes-tool">
-            📎 Imatge
-            <input type="file" id="img-upload" accept="image/*" multiple>
+          <button class="notes-tool" id="btn-bullet" onclick="insertBullet()"></button>
+          <label class="notes-tool" style="cursor:pointer">
+            <span id="btn-img-lbl"></span>
+            <input type="file" id="img-upload" accept="image/*" multiple style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">
           </label>
-          <span class="paste-hint">CTRL+V → enganxar captura</span>
+          <span class="paste-hint" id="paste-hint"></span>
         </div>
-        <div id="notes-area" contenteditable="true" data-placeholder="Notes lliures. Pots enganxar captures directament amb CTRL+V"></div>
+        <div id="notes-area" contenteditable="true" data-placeholder=""></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-danger" id="btn-delete" style="display:none">🗑 ELIMINAR</button>
-      <button class="btn-secondary" id="btn-cancel">Cancel·lar</button>
-      <button class="btn-primary" id="btn-save">DESAR</button>
+      <button class="btn-danger" id="btn-delete" style="display:none"></button>
+      <button class="btn-secondary" id="btn-cancel"></button>
+      <button class="btn-primary" id="btn-save"></button>
     </div>
   </div>
 </div>
 
-<!-- ═══ MODAL IMPORT TXT ═══ -->
+<!-- MODAL IMPORT -->
 <div id="import-overlay" class="modal-overlay">
   <div id="import-modal" class="modal-box">
     <div class="modal-header">
-      <h2>IMPORTAR TASQUES</h2>
+      <h2 id="imp-modal-title"></h2>
       <button class="modal-close" onclick="closeImportModal()">✕</button>
     </div>
-    <div class="modal-body" id="import-body">
-      <!-- Step 1: tabs + input -->
+    <div class="modal-body">
       <div id="import-step1">
         <div class="import-tabs">
-          <button class="import-tab active" id="tab-file" onclick="switchImportTab('file')">📄 Fitxer .txt</button>
-          <button class="import-tab" id="tab-paste" onclick="switchImportTab('paste')">📋 Enganxar text</button>
+          <button class="import-tab active" id="tab-file" onclick="switchImportTab('file')"></button>
+          <button class="import-tab" id="tab-paste" onclick="switchImportTab('paste')"></button>
         </div>
-
-        <!-- TAB FILE -->
         <div id="import-tab-file">
-          <p class="sec-title">Format del fitxer .txt</p>
-          <div class="import-format-box">
-<span class="comment"># Una tasca per línia. Les línies que comencen per # s'ignoren.</span>
+          <p class="sec-title" id="imp-format-title"></p>
+          <div class="import-format-box" id="imp-format-box"></div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-faint);line-height:1.7;margin-top:8px" id="imp-format-hint"></div>
+          <div class="import-drop-zone" id="import-drop">
+            <div class="drop-icon">📄</div>
+            <div id="drop-main"></div>
+            <div style="margin-top:4px;font-size:10px;color:var(--text-faint)" id="drop-sub"></div>
+            <input type="file" id="txt-drop-input" accept=".txt,text/plain">
+          </div>
+        </div>
+        <div id="import-tab-paste" style="display:none">
+          <p class="sec-title" style="margin-bottom:8px" id="paste-sec-title"></p>
+          <div class="import-format-box" id="imp-format-box2" style="margin-bottom:10px"></div>
+          <textarea id="paste-area"></textarea>
+          <div style="display:flex;justify-content:flex-end;margin-top:8px">
+            <button class="icon-btn" onclick="previewPastedText()" style="background:var(--accent);color:var(--bg);border-color:var(--accent)" id="btn-preview"></button>
+          </div>
+        </div>
+      </div>
+      <div id="import-step2" style="display:none;flex-direction:column;gap:12px">
+        <p class="sec-title" id="import-summary"></p>
+        <div class="import-preview-list" id="import-preview-list"></div>
+        <div class="help-tip" id="imp-tip"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeImportModal()" id="btn-imp-cancel"></button>
+      <button class="btn-secondary" id="btn-import-back" style="display:none" onclick="importGoBack()"></button>
+      <button class="btn-primary" id="btn-confirm-import" style="display:none"></button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AJUDA -->
+<div id="help-overlay" class="modal-overlay">
+  <div id="help-modal" class="modal-box">
+    <div class="modal-header">
+      <h2 id="help-modal-title"></h2>
+      <button class="modal-close" onclick="closeHelpModal()">✕</button>
+    </div>
+    <div class="modal-body" id="help-body"></div>
+    <div class="modal-footer">
+      <button class="btn-primary" onclick="closeHelpModal()" id="btn-help-ok"></button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL BACKUP -->
+<div id="backup-overlay" class="modal-overlay">
+  <div id="backup-modal" class="modal-box">
+    <div class="modal-header">
+      <h2 id="backup-modal-title"></h2>
+      <button class="modal-close" onclick="closeBackupModal()">✕</button>
+    </div>
+    <div class="modal-body" style="gap:10px">
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)" id="backup-warn"></p>
+      <button class="backup-option" onclick="exportJSON()">
+        <span class="bo-icon">⬇</span>
+        <div><div class="bo-title" id="bk-exp-title"></div><div class="bo-desc" id="bk-exp-desc"></div></div>
+      </button>
+      <label class="backup-option" style="cursor:pointer">
+        <span class="bo-icon">⬆</span>
+        <div><div class="bo-title" id="bk-imp-title"></div><div class="bo-desc" id="bk-imp-desc"></div></div>
+        <input type="file" id="import-json-input" accept=".json" style="display:none">
+      </label>
+      <button class="backup-option danger" onclick="confirmClearAll()">
+        <span class="bo-icon">🗑</span>
+        <div><div class="bo-title" id="bk-del-title"></div><div class="bo-desc" id="bk-del-desc"></div></div>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeBackupModal()" id="btn-backup-close"></button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox"><img id="lb-img" src="" alt=""></div>
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// I18N
+// ═══════════════════════════════════════════════════════════════
+const LANGS = {
+  ca: {
+    appTitle: 'TASQUES',
+    appSub: 'GESTOR LOCAL · TOT AL NAVEGADOR',
+    statTotal: 'total', statUrgent: 'urgents', statDone: 'fetes',
+    btnHelp: '? Ajuda', btnBackup: '💾 Còpia', btnImport: '📂 Import .txt', btnNew: '+ NOVA',
+    fAll: 'Totes', fPending: 'Pendents', fDone: 'Fetes', fUrgent: 'Urgents',
+    sPriority: '↕ Prioritat', sDate: '📅 Data', sName: 'Az Nom',
+    searchPH: 'Cerca...',
+    emptyBig: 'RES',
+    emptySub: 'Cap tasca. Prem <strong>+ NOVA</strong> o importa un <strong>.txt</strong>',
+    modalNew: 'NOVA TASCA', modalEdit: 'EDITAR TASCA',
+    lblName: 'Nom de la tasca *', lblPriority: 'Prioritat', lblDate: 'Data límit',
+    lblStatus: 'Estat', lblTag: 'Etiqueta / Categoria', lblNotes: 'Notes',
+    lblBullet: '• Llista', lblImg: '📎 Imatge',
+    pasteHint: 'CTRL+V → enganxar captura',
+    notesPH: 'Notes lliures. Pots enganxar captures directament amb CTRL+V',
+    tagPH: 'ex: feina, personal, projecte...',
+    namePH: 'Descriu la tasca...',
+    pri: ['', '🔴 Crítica', '🟠 Alta', '🟡 Normal', '🔵 Baixa', '⚪ Mínima'],
+    priShort: ['', 'P1', 'P2', 'P3', 'P4', 'P5'],
+    priName: ['', 'Crítica', 'Alta', 'Normal', 'Baixa', 'Mínima'],
+    statusPendent: '⏳ Pendent', statusFeta: '✅ Feta',
+    btnDelete: '🗑 ELIMINAR', btnCancel: 'Cancel·lar', btnSave: 'DESAR',
+    confirmDelete: 'Eliminar aquesta tasca?',
+    markDone: 'Marcar feta', markPending: 'Marcar pendent',
+    bannerText: '<strong>Les dades es guarden al localStorage del navegador.</strong> Si netegeu el cau del navegador les tasques es perdran. <a onclick="openBackupModal()">Feu còpies de seguretat regularment →</a>',
+    bannerExport: '⬇ Exportar còpia ara',
+    impTitle: 'IMPORTAR TASQUES',
+    impTabFile: '📄 Fitxer .txt', impTabPaste: '📋 Enganxar text',
+    impFormatTitle: 'Format del fitxer .txt',
+    impFormatBox: `<span class="comment"># Una tasca per línia. Les línies que comencen per # s'ignoren.</span>
 <span class="comment"># Format simple (nom sol):</span>
 <span class="line-eg">Comprar material d'oficina</span>
 <span class="comment"># Format complet (separat per |):</span>
@@ -373,186 +460,470 @@
 <span class="line-eg">Entregar informe <span class="kw">|</span> 1 <span class="kw">|</span> 30/06/2025 <span class="kw">|</span> feina</span>
 <span class="line-eg">Trucar al metge <span class="kw">|</span> alta <span class="kw">|</span> 15/07/2025</span>
 <span class="line-eg">Revisar pressupost <span class="kw">|</span> normal <span class="kw">|</span> <span class="kw">|</span> finances</span>
-<span class="line-eg">Netejar el cotxe</span></div>
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-faint);line-height:1.7;margin-top:8px">
-            <strong style="color:var(--text-muted)">Prioritat:</strong> 1–5 o: critica · alta · normal · baixa · minima<br>
-            <strong style="color:var(--text-muted)">Data:</strong> dd/mm/aaaa &nbsp;o&nbsp; aaaa-mm-dd<br>
-            <strong style="color:var(--text-muted)">Etiqueta:</strong> qualsevol text lliure
-          </div>
-          <div class="import-drop-zone" id="import-drop">
-            <div class="drop-icon">📄</div>
-            <div>Arrossega el fitxer .txt aquí</div>
-            <div style="margin-top:4px;font-size:10px;color:var(--text-faint)">o clica per seleccionar</div>
-            <input type="file" id="txt-drop-input" accept=".txt,text/plain">
-          </div>
-        </div>
-
-        <!-- TAB PASTE -->
-        <div id="import-tab-paste" style="display:none">
-          <p class="sec-title" style="margin-bottom:8px">Enganxa les tasques aquí</p>
-          <div class="import-format-box" style="margin-bottom:10px">
-<span class="comment"># Una tasca per línia · Format: Nom | Prioritat | Data | Etiqueta</span>
-<span class="line-eg">Comprar material d'oficina</span>
-<span class="line-eg">Entregar informe <span class="kw">|</span> 1 <span class="kw">|</span> 30/06/2025 <span class="kw">|</span> feina</span>
-<span class="line-eg">Trucar al metge <span class="kw">|</span> alta <span class="kw">|</span> 15/07/2025</span></div>
-          <textarea id="paste-area" placeholder="Enganxa aquí (CTRL+V) o escriu les tasques directament, una per línia..."></textarea>
-          <div style="display:flex;justify-content:flex-end;margin-top:8px">
-            <button class="icon-btn" onclick="previewPastedText()" style="background:var(--accent);color:var(--bg);border-color:var(--accent)">→ PREVISUALITZAR</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: preview (hidden until loaded) -->
-      <div id="import-step2" style="display:none">
-        <p class="sec-title" id="import-summary"></p>
-        <div class="import-preview-list" id="import-preview-list"></div>
-        <div class="help-tip">
-          <strong>Les tasques s'afegiran</strong> a les existents sense esborrar res.
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeImportModal()">Cancel·lar</button>
-      <button class="btn-secondary" id="btn-import-back" style="display:none" onclick="importGoBack()">← Tornar</button>
-      <button class="btn-primary" id="btn-confirm-import" style="display:none">IMPORTAR</button>
-    </div>
+<span class="line-eg">Netejar el cotxe</span>`,
+    impFormatHint: `<strong style="color:var(--text-muted)">Prioritat:</strong> 1–5 o: critica · alta · normal · baixa · minima<br>
+<strong style="color:var(--text-muted)">Data:</strong> dd/mm/aaaa &nbsp;o&nbsp; aaaa-mm-dd<br>
+<strong style="color:var(--text-muted)">Etiqueta:</strong> qualsevol text lliure`,
+    dropMain: 'Arrossega el fitxer .txt aquí',
+    dropSub: 'o clica per seleccionar',
+    pasteSecTitle: 'Enganxa les tasques aquí',
+    pastePH: 'Enganxa aquí (CTRL+V) o escriu les tasques directament, una per línia...',
+    btnPreview: '→ PREVISUALITZAR',
+    impCancel: 'Cancel·lar', impBack: '← Tornar', impConfirm: 'IMPORTAR',
+    impTip: '<strong>Les tasques s\'afegiran</strong> a les existents sense esborrar res.',
+    impFoundFn: (t,v,e) => `Trobades <span class="import-count">${t}</span> línies — <span style="color:var(--done)">${v} vàlides</span>${e ? ` · <span style="color:var(--urgent)">${e} amb error</span>` : ''}`,
+    impImportedFn: n => `✓ ${n} tasques importades`,
+    impNoText: 'Enganxa o escriu algunes tasques primer',
+    impDateErr: d => `Data no vàlida: "${d}"`,
+    impNoneFound: 'Cap tasca trobada',
+    helpTitle: 'AJUDA', helpOk: 'ENTÈS',
+    helpBody: `
+<div class="help-section">
+  <h3>DRECERES DE TECLAT</h3>
+  <div class="shortcut-grid">
+    <span class="shortcut-key">N</span><span class="shortcut-desc">Crear nova tasca (quan no hi ha cap finestra oberta)</span>
+    <span class="shortcut-key">Ctrl + Enter</span><span class="shortcut-desc">Desar la tasca que estàs editant</span>
+    <span class="shortcut-key">Escape</span><span class="shortcut-desc">Tancar qualsevol finestra oberta</span>
+    <span class="shortcut-key">?</span><span class="shortcut-desc">Obrir aquesta ajuda</span>
+    <span class="shortcut-key">Ctrl + V</span><span class="shortcut-desc">Enganxar captures de pantalla al camp de notes</span>
   </div>
 </div>
-
-<!-- ═══ MODAL AJUDA ═══ -->
-<div id="help-overlay" class="modal-overlay">
-  <div id="help-modal" class="modal-box">
-    <div class="modal-header">
-      <h2>AJUDA</h2>
-      <button class="modal-close" onclick="closeHelpModal()">✕</button>
-    </div>
-    <div class="modal-body">
-
-      <div class="help-section">
-        <h3>DRECERES DE TECLAT</h3>
-        <div class="shortcut-grid">
-          <span class="shortcut-key">N</span>
-          <span class="shortcut-desc">Crear nova tasca (quan no hi ha cap finestra oberta)</span>
-          <span class="shortcut-key">Ctrl + Enter</span>
-          <span class="shortcut-desc">Desar la tasca que estàs editant</span>
-          <span class="shortcut-key">Escape</span>
-          <span class="shortcut-desc">Tancar qualsevol finestra oberta</span>
-          <span class="shortcut-key">?</span>
-          <span class="shortcut-desc">Obrir aquesta ajuda</span>
-          <span class="shortcut-key">Ctrl + V</span>
-          <span class="shortcut-desc">Enganxar captures de pantalla al camp de notes</span>
-        </div>
-      </div>
-
-      <div class="help-sep"></div>
-
-      <div class="help-section">
-        <h3>LLISTA DE TASQUES</h3>
-        <div class="help-tip"><strong>⠿ Arrossegar per reordenar:</strong> Agafa el símbol de punts a l'esquerra de cada tasca i arrossega-la amunt o avall per canviar l'ordre manualment.</div>
-        <div class="help-tip"><strong>○ / ✓ Marcar com a feta:</strong> El botó rodó a la dreta de la tasca la marca com a feta (apareix ratllada i esvanida). Clica de nou per desmarcar-la.</div>
-        <div class="help-tip"><strong>✎ Editar / 🗑 Eliminar:</strong> Apareixen en passar el cursor per sobre de la tasca. Clica el nom o cos de la tasca per obrir-la en detall.</div>
-      </div>
-
-      <div class="help-sep"></div>
-
-      <div class="help-section">
-        <h3>PRIORITATS I ALERTES</h3>
-        <div class="help-tip">
-          La franja de color a l'esquerra indica la prioritat:<br>
-          <span style="color:var(--urgent)">■ P1 Crítica</span> &nbsp;·&nbsp;
-          <span style="color:var(--warning)">■ P2 Alta</span> &nbsp;·&nbsp;
-          <span style="color:var(--accent)">■ P3 Normal</span> &nbsp;·&nbsp;
-          <span style="color:var(--border2)">■ P4 Baixa</span> &nbsp;·&nbsp;
-          <span style="color:var(--text-faint)">■ P5 Mínima</span>
-        </div>
-        <div class="help-tip">
-          <strong>Alertes de data límit:</strong><br>
-          📅 Normal → <span style="color:var(--warning)">🟠 Taronja</span> quan queden ≤3 dies → <span style="color:var(--urgent)">🔴 Vermell parpellejant</span> quan queda 1 dia o menys → <span style="color:var(--urgent)">⚠ Retard</span> si ja ha passat la data.
-        </div>
-      </div>
-
-      <div class="help-sep"></div>
-
-      <div class="help-section">
-        <h3>IMPORTAR DES DE .TXT</h3>
-        <div class="help-tip">
-          Prem el botó <strong>📂 Import .txt</strong> per carregar un fitxer de text i convertir-lo en tasques automàticament. Una línia = una tasca.<br><br>
-          Pots arrossegar el fitxer directament sobre la finestra d'importació.<br><br>
-          Veuràs una previsualització de totes les tasques que es crearan abans de confirmar.
-        </div>
-      </div>
-
-      <div class="help-sep"></div>
-
-      <div class="help-section">
-        <h3>DADES I CÒPIES DE SEGURETAT</h3>
-        <div class="help-tip">
-          <strong>⚠ Les dades viuen al localStorage del navegador.</strong> Això vol dir:<br>
-          • Si esborres l'historial/caché del navegador → perds les tasques<br>
-          • Si uses un navegador diferent → no veus les tasques<br>
-          • En mode incògnit → no es guarda res<br><br>
-          Usa el botó <strong>💾 Còpia</strong> per exportar un fitxer <code>.json</code> de còpia i poder restaurar-lo en qualsevol moment.
-        </div>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <button class="btn-primary" onclick="closeHelpModal()">ENTÈS</button>
-    </div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>LLISTA DE TASQUES</h3>
+  <div class="help-tip"><strong>⠿ Arrossegar per reordenar:</strong> Agafa el símbol de punts a l'esquerra de cada tasca i arrossega-la amunt o avall per canviar l'ordre manualment.</div>
+  <div class="help-tip"><strong>○ / ✓ Marcar com a feta:</strong> El botó rodó a la dreta de la tasca la marca com a feta (apareix ratllada i esvanida). Clica de nou per desmarcar-la.</div>
+  <div class="help-tip"><strong>✎ Editar / 🗑 Eliminar:</strong> Apareixen en passar el cursor per sobre de la tasca. Clica el nom o cos de la tasca per obrir-la en detall.</div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>PRIORITATS I ALERTES</h3>
+  <div class="help-tip">
+    La franja de color a l'esquerra indica la prioritat:<br>
+    <span style="color:var(--urgent)">■ P1 Crítica</span> &nbsp;·&nbsp;
+    <span style="color:var(--warning)">■ P2 Alta</span> &nbsp;·&nbsp;
+    <span style="color:var(--accent)">■ P3 Normal</span> &nbsp;·&nbsp;
+    <span style="color:var(--border2)">■ P4 Baixa</span> &nbsp;·&nbsp;
+    <span style="color:var(--text-faint)">■ P5 Mínima</span>
+  </div>
+  <div class="help-tip">
+    <strong>Alertes de data límit:</strong><br>
+    📅 Normal → <span style="color:var(--warning)">🟠 Taronja</span> quan queden ≤3 dies →
+    <span style="color:var(--urgent)">🔴 Vermell parpellejant</span> quan queda 1 dia o menys →
+    <span style="color:var(--urgent)">⚠ Retard</span> si ja ha passat la data.
   </div>
 </div>
-
-<!-- ═══ MODAL BACKUP ═══ -->
-<div id="backup-overlay" class="modal-overlay">
-  <div id="backup-modal" class="modal-box">
-    <div class="modal-header">
-      <h2>CÒPIA DE SEGURETAT</h2>
-      <button class="modal-close" onclick="closeBackupModal()">✕</button>
-    </div>
-    <div class="modal-body" style="gap:10px">
-      <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">
-        ⚠ Les dades estan al localStorage. Exporta-les per no perdre-les si neteges el navegador.
-      </p>
-
-      <button class="backup-option" onclick="exportJSON()">
-        <span class="bo-icon">⬇</span>
-        <div>
-          <div class="bo-title">Exportar còpia (.json)</div>
-          <div class="bo-desc">Descarrega totes les tasques en un fitxer JSON.<br>Guarda'l al núvol, USB o on vulguis.</div>
-        </div>
-      </button>
-
-      <label class="backup-option" style="cursor:pointer">
-        <span class="bo-icon">⬆</span>
-        <div>
-          <div class="bo-title">Restaurar còpia (.json)</div>
-          <div class="bo-desc">Carrega un fitxer .json exportat anteriorment.<br>Substitueix les tasques actuals.</div>
-        </div>
-        <input type="file" id="import-json-input" accept=".json" style="display:none">
-      </label>
-
-      <button class="backup-option danger" onclick="confirmClearAll()">
-        <span class="bo-icon">🗑</span>
-        <div>
-          <div class="bo-title">Esborrar totes les tasques</div>
-          <div class="bo-desc">Elimina tot el localStorage. Irreversible.<br>Exporta primer si vols conservar les dades.</div>
-        </div>
-      </button>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeBackupModal()">Tancar</button>
-    </div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>IMPORTAR DES DE .TXT</h3>
+  <div class="help-tip">
+    Prem el botó <strong>📂 Import .txt</strong> per carregar un fitxer de text i convertir-lo en tasques automàticament. Una línia = una tasca.<br><br>
+    Pots arrossegar el fitxer directament sobre la finestra d'importació.<br><br>
+    Veuràs una previsualització de totes les tasques que es crearan abans de confirmar.
   </div>
 </div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>DADES I CÒPIES DE SEGURETAT</h3>
+  <div class="help-tip">
+    <strong>⚠ Les dades viuen al localStorage del navegador.</strong> Això vol dir:<br>
+    • Si esborres l'historial/caché del navegador → perds les tasques<br>
+    • Si uses un navegador diferent → no veus les tasques<br>
+    • En mode incògnit → no es guarda res<br><br>
+    Usa el botó <strong>💾 Còpia</strong> per exportar un fitxer <code>.json</code> de còpia i poder restaurar-lo en qualsevol moment.
+  </div>
+</div>`,
+    backupTitle: 'CÒPIA DE SEGURETAT', backupClose: 'Tancar',
+    backupWarn: '⚠ Les dades estan al localStorage. Exporta-les per no perdre-les si neteges el navegador.',
+    bkExpTitle: 'Exportar còpia (.json)',
+    bkExpDesc: 'Descarrega totes les tasques en un fitxer JSON.\nGuarda\'l al núvol, USB o on vulguis.',
+    bkImpTitle: 'Restaurar còpia (.json)',
+    bkImpDesc: 'Carrega un fitxer .json exportat anteriorment.\nSubstitueix les tasques actuals.',
+    bkDelTitle: 'Esborrar totes les tasques',
+    bkDelDesc: 'Elimina tot el localStorage. Irreversible.\nExporta primer si vols conservar les dades.',
+    confirmRestoreFn: n => `Restaurar ${n} tasques?\nLes tasques actuals seran substituïdes.`,
+    confirmClear: 'Segur? Totes les tasques s\'esborraran. Exporta primer!\n\nAquesta acció no es pot desfer.',
+    restoredFn: n => `✓ ${n} tasques restaurades`,
+    clearedMsg: 'Totes les tasques esborrades',
+    exportMsg: '⬇ Còpia exportada',
+    invalidFile: '❌ Fitxer no vàlid',
+    urgToday: '· AVUI!', urgTomorrow: '· DEMÀ!',
+    urgLeftFn: n => `· ${n}d restants`,
+    urgOverdueFn: n => `· ${n}d de retard`,
+  },
 
-<!-- LIGHTBOX -->
-<div id="lightbox"><img id="lb-img" src="" alt=""></div>
+  es: {
+    appTitle: 'TAREAS',
+    appSub: 'GESTOR LOCAL · TODO EN EL NAVEGADOR',
+    statTotal: 'total', statUrgent: 'urgentes', statDone: 'hechas',
+    btnHelp: '? Ayuda', btnBackup: '💾 Copia', btnImport: '📂 Import .txt', btnNew: '+ NUEVA',
+    fAll: 'Todas', fPending: 'Pendientes', fDone: 'Hechas', fUrgent: 'Urgentes',
+    sPriority: '↕ Prioridad', sDate: '📅 Fecha', sName: 'Az Nombre',
+    searchPH: 'Buscar...',
+    emptyBig: 'NADA',
+    emptySub: 'Sin tareas. Pulsa <strong>+ NUEVA</strong> o importa un <strong>.txt</strong>',
+    modalNew: 'NUEVA TAREA', modalEdit: 'EDITAR TAREA',
+    lblName: 'Nombre de la tarea *', lblPriority: 'Prioridad', lblDate: 'Fecha límite',
+    lblStatus: 'Estado', lblTag: 'Etiqueta / Categoría', lblNotes: 'Notas',
+    lblBullet: '• Lista', lblImg: '📎 Imagen',
+    pasteHint: 'CTRL+V → pegar captura',
+    notesPH: 'Notas libres. Puedes pegar capturas directamente con CTRL+V',
+    tagPH: 'ej: trabajo, personal, proyecto...',
+    namePH: 'Describe la tarea...',
+    pri: ['', '🔴 Crítica', '🟠 Alta', '🟡 Normal', '🔵 Baja', '⚪ Mínima'],
+    priShort: ['', 'P1', 'P2', 'P3', 'P4', 'P5'],
+    priName: ['', 'Crítica', 'Alta', 'Normal', 'Baja', 'Mínima'],
+    statusPendent: '⏳ Pendiente', statusFeta: '✅ Hecha',
+    btnDelete: '🗑 ELIMINAR', btnCancel: 'Cancelar', btnSave: 'GUARDAR',
+    confirmDelete: '¿Eliminar esta tarea?',
+    markDone: 'Marcar como hecha', markPending: 'Marcar como pendiente',
+    bannerText: '<strong>Los datos se guardan en el localStorage del navegador.</strong> Si borras la caché del navegador perderás las tareas. <a onclick="openBackupModal()">Haz copias de seguridad regularmente →</a>',
+    bannerExport: '⬇ Exportar copia ahora',
+    impTitle: 'IMPORTAR TAREAS',
+    impTabFile: '📄 Archivo .txt', impTabPaste: '📋 Pegar texto',
+    impFormatTitle: 'Formato del archivo .txt',
+    impFormatBox: `<span class="comment"># Una tarea por línea. Las líneas que empiezan por # se ignoran.</span>
+<span class="comment"># Formato simple (solo nombre):</span>
+<span class="line-eg">Comprar material de oficina</span>
+<span class="comment"># Formato completo (separado por |):</span>
+<span class="comment">#  Nombre | Prioridad | Fecha límite | Etiqueta</span>
+<span class="line-eg">Entregar informe <span class="kw">|</span> 1 <span class="kw">|</span> 30/06/2025 <span class="kw">|</span> trabajo</span>
+<span class="line-eg">Llamar al médico <span class="kw">|</span> alta <span class="kw">|</span> 15/07/2025</span>
+<span class="line-eg">Revisar presupuesto <span class="kw">|</span> normal <span class="kw">|</span> <span class="kw">|</span> finanzas</span>
+<span class="line-eg">Limpiar el coche</span>`,
+    impFormatHint: `<strong style="color:var(--text-muted)">Prioridad:</strong> 1–5 o: critica · alta · normal · baja · minima<br>
+<strong style="color:var(--text-muted)">Fecha:</strong> dd/mm/aaaa &nbsp;o&nbsp; aaaa-mm-dd<br>
+<strong style="color:var(--text-muted)">Etiqueta:</strong> cualquier texto libre`,
+    dropMain: 'Arrastra el archivo .txt aquí',
+    dropSub: 'o haz clic para seleccionar',
+    pasteSecTitle: 'Pega las tareas aquí',
+    pastePH: 'Pega aquí (CTRL+V) o escribe las tareas directamente, una por línea...',
+    btnPreview: '→ PREVISUALIZAR',
+    impCancel: 'Cancelar', impBack: '← Volver', impConfirm: 'IMPORTAR',
+    impTip: '<strong>Las tareas se añadirán</strong> a las existentes sin borrar nada.',
+    impFoundFn: (t,v,e) => `Encontradas <span class="import-count">${t}</span> líneas — <span style="color:var(--done)">${v} válidas</span>${e ? ` · <span style="color:var(--urgent)">${e} con error</span>` : ''}`,
+    impImportedFn: n => `✓ ${n} tareas importadas`,
+    impNoText: 'Pega o escribe algunas tareas primero',
+    impDateErr: d => `Fecha no válida: "${d}"`,
+    impNoneFound: 'Ninguna tarea encontrada',
+    helpTitle: 'AYUDA', helpOk: 'ENTENDIDO',
+    helpBody: `
+<div class="help-section">
+  <h3>ATAJOS DE TECLADO</h3>
+  <div class="shortcut-grid">
+    <span class="shortcut-key">N</span><span class="shortcut-desc">Crear nueva tarea (cuando no hay ninguna ventana abierta)</span>
+    <span class="shortcut-key">Ctrl + Enter</span><span class="shortcut-desc">Guardar la tarea que estás editando</span>
+    <span class="shortcut-key">Escape</span><span class="shortcut-desc">Cerrar cualquier ventana abierta</span>
+    <span class="shortcut-key">?</span><span class="shortcut-desc">Abrir esta ayuda</span>
+    <span class="shortcut-key">Ctrl + V</span><span class="shortcut-desc">Pegar capturas de pantalla en el campo de notas</span>
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>LISTA DE TAREAS</h3>
+  <div class="help-tip"><strong>⠿ Arrastrar para reordenar:</strong> Coge el símbolo de puntos a la izquierda de cada tarea y arrástrala arriba o abajo para cambiar el orden manualmente.</div>
+  <div class="help-tip"><strong>○ / ✓ Marcar como hecha:</strong> El botón redondo a la derecha de la tarea la marca como hecha (aparece tachada y difuminada). Haz clic de nuevo para desmarcarla.</div>
+  <div class="help-tip"><strong>✎ Editar / 🗑 Eliminar:</strong> Aparecen al pasar el cursor sobre la tarea. Haz clic en el nombre o cuerpo de la tarea para abrirla en detalle.</div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>PRIORIDADES Y ALERTAS</h3>
+  <div class="help-tip">
+    La franja de color a la izquierda indica la prioridad:<br>
+    <span style="color:var(--urgent)">■ P1 Crítica</span> &nbsp;·&nbsp;
+    <span style="color:var(--warning)">■ P2 Alta</span> &nbsp;·&nbsp;
+    <span style="color:var(--accent)">■ P3 Normal</span> &nbsp;·&nbsp;
+    <span style="color:var(--border2)">■ P4 Baja</span> &nbsp;·&nbsp;
+    <span style="color:var(--text-faint)">■ P5 Mínima</span>
+  </div>
+  <div class="help-tip">
+    <strong>Alertas de fecha límite:</strong><br>
+    📅 Normal → <span style="color:var(--warning)">🟠 Naranja</span> cuando quedan ≤3 días →
+    <span style="color:var(--urgent)">🔴 Rojo parpadeante</span> cuando queda 1 día o menos →
+    <span style="color:var(--urgent)">⚠ Retraso</span> si ya ha pasado la fecha.
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>IMPORTAR DESDE .TXT</h3>
+  <div class="help-tip">
+    Pulsa el botón <strong>📂 Import .txt</strong> para cargar un archivo de texto y convertirlo en tareas automáticamente. Una línea = una tarea.<br><br>
+    Puedes arrastrar el archivo directamente sobre la ventana de importación.<br><br>
+    Verás una previsualización de todas las tareas que se crearán antes de confirmar.
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>DATOS Y COPIAS DE SEGURIDAD</h3>
+  <div class="help-tip">
+    <strong>⚠ Los datos viven en el localStorage del navegador.</strong> Esto significa:<br>
+    • Si borras el historial/caché del navegador → pierdes las tareas<br>
+    • Si usas un navegador diferente → no ves las tareas<br>
+    • En modo incógnito → no se guarda nada<br><br>
+    Usa el botón <strong>💾 Copia</strong> para exportar un archivo <code>.json</code> de copia y poder restaurarlo en cualquier momento.
+  </div>
+</div>`,
+    backupTitle: 'COPIA DE SEGURIDAD', backupClose: 'Cerrar',
+    backupWarn: '⚠ Los datos están en el localStorage. Expórtalos para no perderlos si limpias el navegador.',
+    bkExpTitle: 'Exportar copia (.json)',
+    bkExpDesc: 'Descarga todas las tareas en un archivo JSON.\nGuárdalo en la nube, USB o donde quieras.',
+    bkImpTitle: 'Restaurar copia (.json)',
+    bkImpDesc: 'Carga un archivo .json exportado anteriormente.\nSustituye las tareas actuales.',
+    bkDelTitle: 'Borrar todas las tareas',
+    bkDelDesc: 'Elimina todo el localStorage. Irreversible.\nExporta primero si quieres conservar los datos.',
+    confirmRestoreFn: n => `¿Restaurar ${n} tareas?\nLas tareas actuales serán sustituidas.`,
+    confirmClear: '¿Seguro? Todas las tareas se borrarán. ¡Exporta primero!\n\nEsta acción no se puede deshacer.',
+    restoredFn: n => `✓ ${n} tareas restauradas`,
+    clearedMsg: 'Todas las tareas borradas',
+    exportMsg: '⬇ Copia exportada',
+    invalidFile: '❌ Archivo no válido',
+    urgToday: '· ¡HOY!', urgTomorrow: '· ¡MAÑANA!',
+    urgLeftFn: n => `· ${n}d restantes`,
+    urgOverdueFn: n => `· ${n}d de retraso`,
+  },
 
-<!-- TOAST -->
-<div id="toast"></div>
+  en: {
+    appTitle: 'TASKS',
+    appSub: 'LOCAL MANAGER · ALL IN THE BROWSER',
+    statTotal: 'total', statUrgent: 'urgent', statDone: 'done',
+    btnHelp: '? Help', btnBackup: '💾 Backup', btnImport: '📂 Import .txt', btnNew: '+ NEW',
+    fAll: 'All', fPending: 'Pending', fDone: 'Done', fUrgent: 'Urgent',
+    sPriority: '↕ Priority', sDate: '📅 Date', sName: 'Az Name',
+    searchPH: 'Search...',
+    emptyBig: 'NONE',
+    emptySub: 'No tasks. Press <strong>+ NEW</strong> or import a <strong>.txt</strong>',
+    modalNew: 'NEW TASK', modalEdit: 'EDIT TASK',
+    lblName: 'Task name *', lblPriority: 'Priority', lblDate: 'Due date',
+    lblStatus: 'Status', lblTag: 'Label / Category', lblNotes: 'Notes',
+    lblBullet: '• List', lblImg: '📎 Image',
+    pasteHint: 'CTRL+V → paste screenshot',
+    notesPH: 'Free notes. You can paste screenshots directly with CTRL+V',
+    tagPH: 'e.g.: work, personal, project...',
+    namePH: 'Describe the task...',
+    pri: ['', '🔴 Critical', '🟠 High', '🟡 Normal', '🔵 Low', '⚪ Minimal'],
+    priShort: ['', 'P1', 'P2', 'P3', 'P4', 'P5'],
+    priName: ['', 'Critical', 'High', 'Normal', 'Low', 'Minimal'],
+    statusPendent: '⏳ Pending', statusFeta: '✅ Done',
+    btnDelete: '🗑 DELETE', btnCancel: 'Cancel', btnSave: 'SAVE',
+    confirmDelete: 'Delete this task?',
+    markDone: 'Mark as done', markPending: 'Mark as pending',
+    bannerText: '<strong>Data is stored in the browser\'s localStorage.</strong> If you clear the browser cache your tasks will be lost. <a onclick="openBackupModal()">Make backups regularly →</a>',
+    bannerExport: '⬇ Export backup now',
+    impTitle: 'IMPORT TASKS',
+    impTabFile: '📄 .txt File', impTabPaste: '📋 Paste text',
+    impFormatTitle: '.txt file format',
+    impFormatBox: `<span class="comment"># One task per line. Lines starting with # are ignored.</span>
+<span class="comment"># Simple format (name only):</span>
+<span class="line-eg">Buy office supplies</span>
+<span class="comment"># Full format (separated by |):</span>
+<span class="comment">#  Name | Priority | Due date | Label</span>
+<span class="line-eg">Submit report <span class="kw">|</span> 1 <span class="kw">|</span> 30/06/2025 <span class="kw">|</span> work</span>
+<span class="line-eg">Call doctor <span class="kw">|</span> high <span class="kw">|</span> 15/07/2025</span>
+<span class="line-eg">Review budget <span class="kw">|</span> normal <span class="kw">|</span> <span class="kw">|</span> finance</span>
+<span class="line-eg">Clean the car</span>`,
+    impFormatHint: `<strong style="color:var(--text-muted)">Priority:</strong> 1–5 or: critical · high · normal · low · minimal<br>
+<strong style="color:var(--text-muted)">Date:</strong> dd/mm/yyyy &nbsp;or&nbsp; yyyy-mm-dd<br>
+<strong style="color:var(--text-muted)">Label:</strong> any free text`,
+    dropMain: 'Drag the .txt file here',
+    dropSub: 'or click to select',
+    pasteSecTitle: 'Paste tasks here',
+    pastePH: 'Paste here (CTRL+V) or type tasks directly, one per line...',
+    btnPreview: '→ PREVIEW',
+    impCancel: 'Cancel', impBack: '← Back', impConfirm: 'IMPORT',
+    impTip: '<strong>Tasks will be added</strong> to existing ones without deleting anything.',
+    impFoundFn: (t,v,e) => `Found <span class="import-count">${t}</span> lines — <span style="color:var(--done)">${v} valid</span>${e ? ` · <span style="color:var(--urgent)">${e} with errors</span>` : ''}`,
+    impImportedFn: n => `✓ ${n} tasks imported`,
+    impNoText: 'Paste or write some tasks first',
+    impDateErr: d => `Invalid date: "${d}"`,
+    impNoneFound: 'No tasks found',
+    helpTitle: 'HELP', helpOk: 'GOT IT',
+    helpBody: `
+<div class="help-section">
+  <h3>KEYBOARD SHORTCUTS</h3>
+  <div class="shortcut-grid">
+    <span class="shortcut-key">N</span><span class="shortcut-desc">Create new task (when no window is open)</span>
+    <span class="shortcut-key">Ctrl + Enter</span><span class="shortcut-desc">Save the task you are editing</span>
+    <span class="shortcut-key">Escape</span><span class="shortcut-desc">Close any open window</span>
+    <span class="shortcut-key">?</span><span class="shortcut-desc">Open this help</span>
+    <span class="shortcut-key">Ctrl + V</span><span class="shortcut-desc">Paste screenshots into the notes field</span>
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>TASK LIST</h3>
+  <div class="help-tip"><strong>⠿ Drag to reorder:</strong> Grab the dot symbol on the left of each task and drag it up or down to change the order manually.</div>
+  <div class="help-tip"><strong>○ / ✓ Mark as done:</strong> The round button on the right marks the task as done (shown crossed out and faded). Click again to unmark.</div>
+  <div class="help-tip"><strong>✎ Edit / 🗑 Delete:</strong> Appear when hovering over the task. Click the task name or body to open it in detail.</div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>PRIORITIES & ALERTS</h3>
+  <div class="help-tip">
+    The colour stripe on the left indicates priority:<br>
+    <span style="color:var(--urgent)">■ P1 Critical</span> &nbsp;·&nbsp;
+    <span style="color:var(--warning)">■ P2 High</span> &nbsp;·&nbsp;
+    <span style="color:var(--accent)">■ P3 Normal</span> &nbsp;·&nbsp;
+    <span style="color:var(--border2)">■ P4 Low</span> &nbsp;·&nbsp;
+    <span style="color:var(--text-faint)">■ P5 Minimal</span>
+  </div>
+  <div class="help-tip">
+    <strong>Due date alerts:</strong><br>
+    📅 Normal → <span style="color:var(--warning)">🟠 Orange</span> when ≤3 days left →
+    <span style="color:var(--urgent)">🔴 Blinking red</span> when ≤1 day left →
+    <span style="color:var(--urgent)">⚠ Overdue</span> if the date has already passed.
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>IMPORT FROM .TXT</h3>
+  <div class="help-tip">
+    Press the <strong>📂 Import .txt</strong> button to load a text file and automatically convert it into tasks. One line = one task.<br><br>
+    You can drag the file directly onto the import window.<br><br>
+    You will see a preview of all the tasks that will be created before confirming.
+  </div>
+</div>
+<div class="help-sep"></div>
+<div class="help-section">
+  <h3>DATA & BACKUPS</h3>
+  <div class="help-tip">
+    <strong>⚠ Data lives in the browser's localStorage.</strong> This means:<br>
+    • If you clear browser history/cache → tasks are lost<br>
+    • If you use a different browser → tasks are not visible<br>
+    • In incognito/private mode → nothing is saved<br><br>
+    Use the <strong>💾 Backup</strong> button to export a <code>.json</code> file and restore it at any time.
+  </div>
+</div>`,
+    backupTitle: 'BACKUP', backupClose: 'Close',
+    backupWarn: '⚠ Data is in localStorage. Export it so you don\'t lose it if you clear the browser.',
+    bkExpTitle: 'Export backup (.json)',
+    bkExpDesc: 'Download all tasks as a JSON file.\nSave it to the cloud, USB or anywhere you like.',
+    bkImpTitle: 'Restore backup (.json)',
+    bkImpDesc: 'Load a previously exported .json file.\nReplaces current tasks.',
+    bkDelTitle: 'Delete all tasks',
+    bkDelDesc: 'Deletes all localStorage. Irreversible.\nExport first if you want to keep the data.',
+    confirmRestoreFn: n => `Restore ${n} tasks?\nCurrent tasks will be replaced.`,
+    confirmClear: 'Are you sure? All tasks will be deleted. Export first!\n\nThis action cannot be undone.',
+    restoredFn: n => `✓ ${n} tasks restored`,
+    clearedMsg: 'All tasks deleted',
+    exportMsg: '⬇ Backup exported',
+    invalidFile: '❌ Invalid file',
+    urgToday: '· TODAY!', urgTomorrow: '· TOMORROW!',
+    urgLeftFn: n => `· ${n}d left`,
+    urgOverdueFn: n => `· ${n}d overdue`,
+  }
+};
 
-<script>
-// ─── DATA ──────────────────────────────────────────────────────────────────
+// ─── LANG STATE ────────────────────────────────────────────────
+let lang = 'ca';
+const L = () => LANGS[lang];
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent.trim() === l.toUpperCase())
+  );
+  document.documentElement.lang = l;
+  applyI18N();
+  renderAll();
+}
+
+function setText(id, txt) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = txt;
+}
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function applyI18N() {
+  const t = L();
+  // Header
+  setText('app-title', t.appTitle);
+  setText('app-subtitle', t.appSub);
+  setText('stat-total-lbl', t.statTotal);
+  setText('stat-urgent-lbl', t.statUrgent);
+  setText('stat-done-lbl', t.statDone);
+  setText('btn-help', t.btnHelp);
+  setText('btn-backup', t.btnBackup);
+  setText('btn-import-txt', t.btnImport);
+  setText('btn-new', t.btnNew);
+  // Toolbar
+  setText('fb-all', t.fAll);
+  setText('fb-pending', t.fPending);
+  setText('fb-done', t.fDone);
+  setText('fb-urgent', t.fUrgent);
+  setText('sb-priority', t.sPriority);
+  setText('sb-date', t.sDate);
+  setText('sb-name', t.sName);
+  document.getElementById('search').placeholder = t.searchPH;
+  // Empty
+  setText('empty-big', t.emptyBig);
+  setHTML('empty-sub', t.emptySub);
+  // Task modal
+  setText('lbl-name', t.lblName);
+  setText('lbl-priority', t.lblPriority);
+  setText('lbl-date', t.lblDate);
+  setText('lbl-status', t.lblStatus);
+  setText('lbl-tag', t.lblTag);
+  setText('lbl-notes', t.lblNotes);
+  setText('btn-bullet', t.lblBullet);
+  setText('btn-img-lbl', t.lblImg);
+  setText('paste-hint', t.pasteHint);
+  document.getElementById('notes-area').dataset.placeholder = t.notesPH;
+  document.getElementById('f-tag').placeholder = t.tagPH;
+  document.getElementById('f-name').placeholder = t.namePH;
+  // Priority options
+  const fPri = document.getElementById('f-priority');
+  for (let i = 0; i < fPri.options.length; i++) {
+    fPri.options[i].textContent = t.pri[i + 1];
+  }
+  // Status options
+  document.getElementById('f-status').options[0].textContent = t.statusPendent;
+  document.getElementById('f-status').options[1].textContent = t.statusFeta;
+  // Modal footer
+  setText('btn-delete', t.btnDelete);
+  setText('btn-cancel', t.btnCancel);
+  setText('btn-save', t.btnSave);
+  // Banner
+  setHTML('banner-text', t.bannerText);
+  setText('banner-export-btn', t.bannerExport);
+  // Import modal
+  setText('imp-modal-title', t.impTitle);
+  setText('tab-file', t.impTabFile);
+  setText('tab-paste', t.impTabPaste);
+  setText('imp-format-title', t.impFormatTitle);
+  setHTML('imp-format-box', t.impFormatBox);
+  setHTML('imp-format-hint', t.impFormatHint);
+  setHTML('imp-format-box2', t.impFormatBox);
+  setText('drop-main', t.dropMain);
+  setText('drop-sub', t.dropSub);
+  setText('paste-sec-title', t.pasteSecTitle);
+  document.getElementById('paste-area').placeholder = t.pastePH;
+  setText('btn-preview', t.btnPreview);
+  setText('btn-imp-cancel', t.impCancel);
+  setText('btn-import-back', t.impBack);
+  setText('btn-confirm-import', t.impConfirm);
+  setHTML('imp-tip', t.impTip);
+  // Help
+  setText('help-modal-title', t.helpTitle);
+  setHTML('help-body', t.helpBody);
+  setText('btn-help-ok', t.helpOk);
+  // Backup
+  setText('backup-modal-title', t.backupTitle);
+  setText('backup-warn', t.backupWarn);
+  setText('bk-exp-title', t.bkExpTitle);
+  setText('bk-exp-desc', t.bkExpDesc);
+  setText('bk-imp-title', t.bkImpTitle);
+  setText('bk-imp-desc', t.bkImpDesc);
+  setText('bk-del-title', t.bkDelTitle);
+  setText('bk-del-desc', t.bkDelDesc);
+  setText('btn-backup-close', t.backupClose);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
 const STORE_KEY = 'tasques_v2';
 function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
 function save(t) { localStorage.setItem(STORE_KEY, JSON.stringify(t)); }
@@ -563,95 +934,105 @@ let currentFilter = 'all';
 let currentSort = 'priority';
 let searchQuery = '';
 
-// ─── DATES ────────────────────────────────────────────────────────────────
+// ─── DATES ────────────────────────────────────────────────────
 function todayStr() { return new Date().toISOString().slice(0,10); }
 function daysLeft(d) {
   if (!d) return null;
   return Math.round((new Date(d+'T00:00:00') - new Date(todayStr()+'T00:00:00')) / 86400000);
 }
 function dateUrgency(d, status) {
-  if (!d || status==='feta') return 'normal';
+  if (!d || status === 'feta') return 'normal';
   const n = daysLeft(d);
   if (n < 0) return 'overdue';
   if (n <= 1) return 'urgent';
   if (n <= 3) return 'warning';
   return 'normal';
 }
-function formatDate(d) { if (!d) return ''; const [y,m,dd]=d.split('-'); return `${dd}/${m}/${y}`; }
+function formatDate(d) {
+  if (!d) return '';
+  const [y,m,dd] = d.split('-');
+  return `${dd}/${m}/${y}`;
+}
 function urgLabel(d, status) {
-  if (!d || status==='feta') return '';
+  const t = L();
+  if (!d || status === 'feta') return '';
   const n = daysLeft(d);
-  if (n < 0) return ` · ${Math.abs(n)}d de retard`;
-  if (n === 0) return ' · AVUI!';
-  if (n === 1) return ' · DEMÀ!';
-  return ` · ${n}d restants`;
+  if (n < 0) return ` ${t.urgOverdueFn(Math.abs(n))}`;
+  if (n === 0) return ` ${t.urgToday}`;
+  if (n === 1) return ` ${t.urgTomorrow}`;
+  return ` ${t.urgLeftFn(n)}`;
 }
 
-// ─── RENDER ───────────────────────────────────────────────────────────────
-const PRI_L = {1:'P1',2:'P2',3:'P3',4:'P4',5:'P5'};
-const PRI_N = {1:'Crítica',2:'Alta',3:'Normal',4:'Baixa',5:'Mínima'};
-
+// ─── RENDER ───────────────────────────────────────────────────
 function getFiltered() {
   let list = [...tasks];
-  if (currentFilter==='pending') list = list.filter(t=>t.status!=='feta');
-  if (currentFilter==='done')    list = list.filter(t=>t.status==='feta');
-  if (currentFilter==='urgent')  list = list.filter(t=>{ const u=dateUrgency(t.date,t.status); return u==='urgent'||u==='overdue'; });
+  if (currentFilter === 'pending') list = list.filter(t => t.status !== 'feta');
+  if (currentFilter === 'done')    list = list.filter(t => t.status === 'feta');
+  if (currentFilter === 'urgent')  list = list.filter(t => { const u = dateUrgency(t.date,t.status); return u==='urgent'||u==='overdue'; });
   if (searchQuery.trim()) {
-    const q=searchQuery.toLowerCase();
-    list = list.filter(t=>t.name.toLowerCase().includes(q)||(t.tag||'').toLowerCase().includes(q)||(t.notes||'').toLowerCase().includes(q));
+    const q = searchQuery.toLowerCase();
+    list = list.filter(t => t.name.toLowerCase().includes(q)||(t.tag||'').toLowerCase().includes(q)||(t.notes||'').toLowerCase().includes(q));
   }
-  if (currentSort==='priority') list.sort((a,b)=>a.priority-b.priority||a.order-b.order);
-  else if (currentSort==='date') list.sort((a,b)=>{ if(!a.date&&!b.date)return 0; if(!a.date)return 1; if(!b.date)return -1; return a.date.localeCompare(b.date); });
-  else if (currentSort==='name') list.sort((a,b)=>a.name.localeCompare(b.name));
+  if (currentSort === 'priority') list.sort((a,b) => a.priority-b.priority || a.order-b.order);
+  else if (currentSort === 'date') list.sort((a,b) => { if(!a.date&&!b.date)return 0; if(!a.date)return 1; if(!b.date)return -1; return a.date.localeCompare(b.date); });
+  else if (currentSort === 'name') list.sort((a,b) => a.name.localeCompare(b.name));
   return list;
 }
 
 function renderAll() {
+  const t = L();
   const list = getFiltered();
   const container = document.getElementById('task-list');
-  const empty = document.getElementById('empty-state');
   container.innerHTML = '';
-  if (list.length===0) { empty.style.display='block'; }
-  else { empty.style.display='none'; list.forEach(t=>container.appendChild(buildItem(t))); }
+  const empty = document.getElementById('empty-state');
+  if (list.length === 0) { empty.style.display = 'block'; }
+  else { empty.style.display = 'none'; list.forEach(tk => container.appendChild(buildItem(tk))); }
   document.getElementById('stat-total').textContent   = tasks.length;
-  document.getElementById('stat-done').textContent    = tasks.filter(t=>t.status==='feta').length;
-  document.getElementById('stat-urgent').textContent  = tasks.filter(t=>{ const u=dateUrgency(t.date,t.status); return u==='urgent'||u==='overdue'; }).length;
+  document.getElementById('stat-done').textContent    = tasks.filter(tk => tk.status === 'feta').length;
+  document.getElementById('stat-urgent').textContent  = tasks.filter(tk => { const u = dateUrgency(tk.date,tk.status); return u==='urgent'||u==='overdue'; }).length;
 }
 
-function buildItem(t) {
-  const urg = dateUrgency(t.date, t.status);
+function buildItem(tk) {
+  const t = L();
+  const urg = dateUrgency(tk.date, tk.status);
   const div = document.createElement('div');
-  div.className = `task-item pri-${t.priority}${t.status==='feta'?' done-task':''}`;
-  div.dataset.id = t.id; div.draggable = true;
+  div.className = `task-item pri-${tk.priority}${tk.status==='feta'?' done-task':''}`;
+  div.dataset.id = tk.id;
+  div.draggable = true;
+
   let dateHtml = '';
-  if (t.date) {
-    const cls = urg==='urgent'||urg==='overdue'?'urgent':urg==='warning'?'warning':'';
-    const icon = urg==='overdue'?'⚠':urg==='urgent'?'🔴':'📅';
-    dateHtml = `<span class="task-date ${cls}">${icon} ${formatDate(t.date)}${urgLabel(t.date,t.status)}</span>`;
+  if (tk.date) {
+    const cls = urg==='urgent'||urg==='overdue' ? 'urgent' : urg==='warning' ? 'warning' : '';
+    const icon = urg==='overdue' ? '⚠' : urg==='urgent' ? '🔴' : '📅';
+    dateHtml = `<span class="task-date ${cls}">${icon} ${formatDate(tk.date)}${urgLabel(tk.date,tk.status)}</span>`;
   }
-  const tagHtml  = t.tag ? `<span class="task-tag">${esc(t.tag)}</span>` : '';
-  const hasText  = t.notes && t.notes.replace(/<[^>]*>/g,'').trim();
-  const hasImgs  = t.images && t.images.length>0;
-  const noteHtml = (hasText||hasImgs) ? `<span class="task-has-note">✎${hasImgs?` +${t.images.length}img`:''}</span>` : '';
+  const tagHtml  = tk.tag ? `<span class="task-tag">${esc(tk.tag)}</span>` : '';
+  const hasText  = tk.notes && tk.notes.replace(/<[^>]*>/g,'').trim();
+  const hasImgs  = tk.images && tk.images.length > 0;
+  const noteHtml = (hasText||hasImgs) ? `<span class="task-has-note">✎${hasImgs ? ` +${tk.images.length}img` : ''}</span>` : '';
+  const ps = t.priShort[tk.priority];
+  const pn = t.priName[tk.priority];
+
   div.innerHTML = `
-    <div class="drag-handle" title="Arrossega per reordenar">⠿</div>
+    <div class="drag-handle" title="drag">⠿</div>
     <div class="stripe"></div>
-    <div class="task-main" onclick="openEdit('${t.id}')">
-      <div class="task-name">${esc(t.name)}</div>
+    <div class="task-main" onclick="openEdit('${tk.id}')">
+      <div class="task-name">${esc(tk.name)}</div>
       <div class="task-meta">
-        <span class="pri-badge p${t.priority}">${PRI_L[t.priority]} ${PRI_N[t.priority]}</span>
+        <span class="pri-badge p${tk.priority}">${ps} ${pn}</span>
         ${dateHtml}${tagHtml}${noteHtml}
       </div>
     </div>
     <div class="task-check-wrap">
-      <button class="task-btn check-btn${t.status==='feta'?' done':''}"
-        title="${t.status==='feta'?'Marcar pendent':'Marcar feta'}"
-        onclick="toggleDone('${t.id}',event)">${t.status==='feta'?'✓':'○'}</button>
+      <button class="task-btn check-btn${tk.status==='feta'?' done':''}"
+        title="${tk.status==='feta' ? t.markPending : t.markDone}"
+        onclick="toggleDone('${tk.id}',event)">${tk.status==='feta'?'✓':'○'}</button>
     </div>
     <div class="task-actions">
-      <button class="task-btn" title="Editar" onclick="openEdit('${t.id}',event)">✎</button>
-      <button class="task-btn del" title="Eliminar" onclick="deleteTask('${t.id}',event)">🗑</button>
+      <button class="task-btn" title="Edit" onclick="openEdit('${tk.id}',event)">✎</button>
+      <button class="task-btn del" title="Delete" onclick="deleteTask('${tk.id}',event)">🗑</button>
     </div>`;
+
   div.addEventListener('dragstart', onDragStart);
   div.addEventListener('dragover',  onDragOver);
   div.addEventListener('dragleave', onDragLeave);
@@ -662,112 +1043,129 @@ function buildItem(t) {
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// ─── DRAG ────────────────────────────────────────────────────────────────
+// ─── DRAG ────────────────────────────────────────────────────
 let dragId = null;
-function onDragStart(e) { dragId=e.currentTarget.dataset.id; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
+function onDragStart(e) { dragId = e.currentTarget.dataset.id; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; }
 function onDragOver(e)  { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
 function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
 function onDrop(e) {
   e.preventDefault(); e.currentTarget.classList.remove('drag-over');
-  if (!dragId||dragId===e.currentTarget.dataset.id) return;
-  const from=tasks.findIndex(t=>t.id===dragId), to=tasks.findIndex(t=>t.id===e.currentTarget.dataset.id);
-  if (from<0||to<0) return;
-  tasks.splice(to,0,tasks.splice(from,1)[0]);
-  tasks.forEach((t,i)=>t.order=i); save(tasks); renderAll();
+  if (!dragId || dragId === e.currentTarget.dataset.id) return;
+  const from = tasks.findIndex(t => t.id === dragId);
+  const to   = tasks.findIndex(t => t.id === e.currentTarget.dataset.id);
+  if (from < 0 || to < 0) return;
+  tasks.splice(to, 0, tasks.splice(from, 1)[0]);
+  tasks.forEach((t,i) => t.order = i);
+  save(tasks); renderAll();
 }
-function onDragEnd(e) { e.currentTarget.classList.remove('dragging'); dragId=null; }
+function onDragEnd(e) { e.currentTarget.classList.remove('dragging'); dragId = null; }
 
-// ─── TOGGLE / DELETE ─────────────────────────────────────────────────────
+// ─── TOGGLE / DELETE ─────────────────────────────────────────
 function toggleDone(id, e) {
-  e&&e.stopPropagation();
-  const t=tasks.find(t=>t.id===id); if(!t) return;
-  t.status=t.status==='feta'?'pendent':'feta'; save(tasks); renderAll();
+  e && e.stopPropagation();
+  const tk = tasks.find(t => t.id === id); if (!tk) return;
+  tk.status = tk.status === 'feta' ? 'pendent' : 'feta';
+  save(tasks); renderAll();
 }
 function deleteTask(id, e) {
-  e&&e.stopPropagation();
-  if(!confirm('Eliminar aquesta tasca?')) return;
-  tasks=tasks.filter(t=>t.id!==id); save(tasks); renderAll();
+  e && e.stopPropagation();
+  if (!confirm(L().confirmDelete)) return;
+  tasks = tasks.filter(t => t.id !== id);
+  save(tasks); renderAll();
 }
 
-// ─── TASK MODAL ──────────────────────────────────────────────────────────
+// ─── TASK MODAL ──────────────────────────────────────────────
 const overlay   = document.getElementById('modal-overlay');
 const notesArea = document.getElementById('notes-area');
 let modalImages = [];
 
 function openNew() {
-  editId=null;
-  document.getElementById('modal-title').textContent='NOVA TASCA';
-  ['f-name','f-tag'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-priority').value='3';
-  document.getElementById('f-date').value='';
-  document.getElementById('f-status').value='pendent';
-  notesArea.innerHTML=''; modalImages=[];
-  document.getElementById('btn-delete').style.display='none';
+  editId = null;
+  document.getElementById('modal-title').textContent = L().modalNew;
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-tag').value = '';
+  document.getElementById('f-priority').value = '3';
+  document.getElementById('f-date').value = '';
+  document.getElementById('f-status').value = 'pendent';
+  notesArea.innerHTML = ''; modalImages = [];
+  document.getElementById('btn-delete').style.display = 'none';
   overlay.classList.add('open');
-  setTimeout(()=>document.getElementById('f-name').focus(),100);
+  setTimeout(() => document.getElementById('f-name').focus(), 100);
 }
 function openEdit(id, e) {
-  e&&e.stopPropagation();
-  const t=tasks.find(t=>t.id===id); if(!t) return;
-  editId=id;
-  document.getElementById('modal-title').textContent='EDITAR TASCA';
-  document.getElementById('f-name').value=t.name;
-  document.getElementById('f-priority').value=t.priority;
-  document.getElementById('f-date').value=t.date||'';
-  document.getElementById('f-status').value=t.status;
-  document.getElementById('f-tag').value=t.tag||'';
-  notesArea.innerHTML=t.notes||''; modalImages=t.images?[...t.images]:[];
-  document.getElementById('btn-delete').style.display='block';
+  e && e.stopPropagation();
+  const tk = tasks.find(t => t.id === id); if (!tk) return;
+  editId = id;
+  document.getElementById('modal-title').textContent = L().modalEdit;
+  document.getElementById('f-name').value = tk.name;
+  document.getElementById('f-priority').value = tk.priority;
+  document.getElementById('f-date').value = tk.date || '';
+  document.getElementById('f-status').value = tk.status;
+  document.getElementById('f-tag').value = tk.tag || '';
+  notesArea.innerHTML = tk.notes || '';
+  modalImages = tk.images ? [...tk.images] : [];
+  document.getElementById('btn-delete').style.display = 'block';
   overlay.classList.add('open');
 }
-function closeModal() { overlay.classList.remove('open'); editId=null; }
+function closeModal() { overlay.classList.remove('open'); editId = null; }
 function saveModal() {
-  const name=document.getElementById('f-name').value.trim();
-  if (!name) { const fi=document.getElementById('f-name'); fi.focus(); fi.style.borderColor='var(--urgent)'; setTimeout(()=>fi.style.borderColor='',1200); return; }
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) {
+    const fi = document.getElementById('f-name');
+    fi.focus(); fi.style.borderColor = 'var(--urgent)';
+    setTimeout(() => fi.style.borderColor = '', 1200);
+    return;
+  }
   const data = {
-    id:editId||uid(), name,
-    priority:parseInt(document.getElementById('f-priority').value),
-    date:document.getElementById('f-date').value||null,
-    status:document.getElementById('f-status').value,
-    tag:document.getElementById('f-tag').value.trim(),
-    notes:notesArea.innerHTML,
-    images:[...modalImages],
-    order:editId?tasks.find(t=>t.id===editId).order:tasks.length,
+    id: editId || uid(), name,
+    priority: parseInt(document.getElementById('f-priority').value),
+    date: document.getElementById('f-date').value || null,
+    status: document.getElementById('f-status').value,
+    tag: document.getElementById('f-tag').value.trim(),
+    notes: notesArea.innerHTML,
+    images: [...modalImages],
+    order: editId ? tasks.find(t => t.id === editId).order : tasks.length,
   };
-  if (editId) tasks[tasks.findIndex(t=>t.id===editId)]=data; else tasks.push(data);
+  if (editId) tasks[tasks.findIndex(t => t.id === editId)] = data;
+  else tasks.push(data);
   save(tasks); renderAll(); closeModal();
 }
 function deleteFromModal() {
-  if(!editId||!confirm('Eliminar aquesta tasca?')) return;
-  tasks=tasks.filter(t=>t.id!==editId); save(tasks); renderAll(); closeModal();
+  if (!editId || !confirm(L().confirmDelete)) return;
+  tasks = tasks.filter(t => t.id !== editId);
+  save(tasks); renderAll(); closeModal();
 }
 
-// ─── IMAGES ──────────────────────────────────────────────────────────────
+// ─── IMAGES ──────────────────────────────────────────────────
 document.getElementById('img-upload').addEventListener('change', function(e) {
-  Array.from(e.target.files).forEach(f=>readImg(f,insertImg)); this.value='';
+  Array.from(e.target.files).forEach(f => readImg(f, insertImg));
+  this.value = '';
 });
-function readImg(file,cb) { const r=new FileReader(); r.onload=ev=>cb(ev.target.result); r.readAsDataURL(file); }
+function readImg(file, cb) { const r = new FileReader(); r.onload = ev => cb(ev.target.result); r.readAsDataURL(file); }
 function insertImg(src) {
   notesArea.focus();
-  const img=document.createElement('img'); img.src=src; img.onclick=()=>openLightbox(src);
-  const sel=window.getSelection();
-  if (sel.rangeCount) { const r=sel.getRangeAt(0); r.collapse(false); r.insertNode(img); r.setStartAfter(img); r.collapse(true); sel.removeAllRanges(); sel.addRange(r); }
-  else notesArea.appendChild(img);
+  const img = document.createElement('img'); img.src = src; img.onclick = () => openLightbox(src);
+  const sel = window.getSelection();
+  if (sel.rangeCount) {
+    const r = sel.getRangeAt(0); r.collapse(false); r.insertNode(img);
+    r.setStartAfter(img); r.collapse(true); sel.removeAllRanges(); sel.addRange(r);
+  } else notesArea.appendChild(img);
   modalImages.push(src);
 }
 notesArea.addEventListener('paste', function(e) {
-  const items=e.clipboardData&&e.clipboardData.items; if(!items) return;
-  for (let it of items) { if(it.type.startsWith('image/')) { e.preventDefault(); readImg(it.getAsFile(),insertImg); return; } }
+  const items = e.clipboardData && e.clipboardData.items; if (!items) return;
+  for (let it of items) { if (it.type.startsWith('image/')) { e.preventDefault(); readImg(it.getAsFile(), insertImg); return; } }
 });
-function formatDoc(cmd) { notesArea.focus(); document.execCommand(cmd,false,null); }
-function insertBullet() { notesArea.focus(); document.execCommand('insertHTML',false,'<br>• '); }
+function formatDoc(cmd) { notesArea.focus(); document.execCommand(cmd, false, null); }
+function insertBullet() { notesArea.focus(); document.execCommand('insertHTML', false, '<br>• '); }
 
-// ─── LIGHTBOX ─────────────────────────────────────────────────────────────
-function openLightbox(src) { document.getElementById('lb-img').src=src; document.getElementById('lightbox').classList.add('open'); }
+// ─── LIGHTBOX ─────────────────────────────────────────────────
+function openLightbox(src) { document.getElementById('lb-img').src = src; document.getElementById('lightbox').classList.add('open'); }
 document.getElementById('lightbox').addEventListener('click', function() { this.classList.remove('open'); });
 
-// ─── IMPORT TXT ──────────────────────────────────────────────────────────
+// ─── IMPORT TXT ──────────────────────────────────────────────
 let pendingImport = [];
+let currentImportTab = 'file';
 
 function openImportModal() {
   importGoBack();
@@ -775,220 +1173,222 @@ function openImportModal() {
 }
 function closeImportModal() {
   document.getElementById('import-overlay').classList.remove('open');
-  document.getElementById('paste-area').value='';
-  currentImportTab='file';
+  document.getElementById('paste-area').value = '';
   pendingImport = [];
+  importGoBack();
 }
 function importGoBack() {
-  document.getElementById('import-step1').style.display='block';
-  document.getElementById('import-step2').style.display='none';
-  document.getElementById('btn-confirm-import').style.display='none';
-  document.getElementById('btn-import-back').style.display='none';
-  pendingImport=[];
-  // restore active tab view
+  document.getElementById('import-step1').style.display = 'block';
+  document.getElementById('import-step2').style.display = 'none';
+  document.getElementById('btn-confirm-import').style.display = 'none';
+  document.getElementById('btn-import-back').style.display = 'none';
+  pendingImport = [];
   switchImportTab(currentImportTab);
-}
-function openImportModalOnPaste() {
-  currentImportTab = 'paste';
-  openImportModal();
-  setTimeout(()=>{ const ta=document.getElementById('paste-area'); if(ta) ta.focus(); }, 100);
 }
 
 document.getElementById('btn-import-txt').addEventListener('click', openImportModal);
 document.getElementById('txt-upload').addEventListener('change', function(e) {
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader(); r.onload=ev=>{ parseTxtAndPreview(ev.target.result); this.value=''; }; r.readAsText(f,'UTF-8');
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader(); r.onload = ev => { parseTxtAndPreview(ev.target.result); this.value = ''; }; r.readAsText(f, 'UTF-8');
 });
 
-// Drop inside modal
 const dropZone = document.getElementById('import-drop');
-dropZone.addEventListener('dragover', e=>{ e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', ()=>dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', e=>{ e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragover'); const f=[...e.dataTransfer.files].find(f=>f.name.endsWith('.txt')||f.type==='text/plain'); if(!f) return; const r=new FileReader(); r.onload=ev=>parseTxtAndPreview(ev.target.result); r.readAsText(f,'UTF-8'); });
+dropZone.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragover');
+  const f = [...e.dataTransfer.files].find(f => f.name.endsWith('.txt') || f.type === 'text/plain');
+  if (!f) return;
+  const r = new FileReader(); r.onload = ev => parseTxtAndPreview(ev.target.result); r.readAsText(f, 'UTF-8');
+});
 document.getElementById('txt-drop-input').addEventListener('change', function(e) {
-  const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ parseTxtAndPreview(ev.target.result); this.value=''; }; r.readAsText(f,'UTF-8');
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader(); r.onload = ev => { parseTxtAndPreview(ev.target.result); this.value = ''; }; r.readAsText(f, 'UTF-8');
 });
 
-// Also allow drop anywhere on page
-document.addEventListener('dragover', e=>{ if([...e.dataTransfer.types].includes('Files')) e.preventDefault(); });
-document.addEventListener('drop', e=>{
-  const f=[...e.dataTransfer.files].find(f=>f.name.endsWith('.txt')||f.type==='text/plain');
-  if(!f) return; e.preventDefault();
-  const r=new FileReader(); r.onload=ev=>{ parseTxtAndPreview(ev.target.result); openImportModal(); }; r.readAsText(f,'UTF-8');
+document.addEventListener('dragover', e => { if ([...e.dataTransfer.types].includes('Files')) e.preventDefault(); });
+document.addEventListener('drop', e => {
+  const f = [...e.dataTransfer.files].find(f => f.name.endsWith('.txt') || f.type === 'text/plain');
+  if (!f) return; e.preventDefault();
+  const r = new FileReader(); r.onload = ev => { parseTxtAndPreview(ev.target.result); openImportModal(); }; r.readAsText(f, 'UTF-8');
 });
 
-// ─── IMPORT TABS ──────────────────────────────────────────────────────────
-let currentImportTab = 'file';
 function switchImportTab(tab) {
   currentImportTab = tab;
-  document.getElementById('tab-file').classList.toggle('active', tab==='file');
-  document.getElementById('tab-paste').classList.toggle('active', tab==='paste');
-  document.getElementById('import-tab-file').style.display = tab==='file' ? 'block' : 'none';
-  document.getElementById('import-tab-paste').style.display = tab==='paste' ? 'block' : 'none';
+  document.getElementById('tab-file').classList.toggle('active', tab === 'file');
+  document.getElementById('tab-paste').classList.toggle('active', tab === 'paste');
+  document.getElementById('import-tab-file').style.display  = tab === 'file'  ? 'block' : 'none';
+  document.getElementById('import-tab-paste').style.display = tab === 'paste' ? 'block' : 'none';
 }
 
 function previewPastedText() {
   const text = document.getElementById('paste-area').value.trim();
-  if (!text) { showToast('Enganxa o escriu algunes tasques primer', 'error'); return; }
+  if (!text) { showToast(L().impNoText, 'error'); return; }
   parseTxtAndPreview(text);
 }
 
-// Allow CTRL+V anywhere in paste tab to focus textarea
 document.addEventListener('paste', function(e) {
-  const overlay = document.getElementById('import-overlay');
-  if (!overlay.classList.contains('open')) return;
+  const ov = document.getElementById('import-overlay');
+  if (!ov.classList.contains('open')) return;
   if (currentImportTab !== 'paste') return;
   const active = document.activeElement;
   if (active && (active.tagName === 'TEXTAREA' || active.tagName === 'INPUT')) return;
   const text = e.clipboardData.getData('text/plain');
-  if (text) {
-    const ta = document.getElementById('paste-area');
-    ta.value += text;
-    ta.focus();
-    e.preventDefault();
-  }
+  if (text) { const ta = document.getElementById('paste-area'); ta.value += text; ta.focus(); e.preventDefault(); }
 });
 
 function parseTxt(text) {
-  const PM = {'critica':1,'crítica':1,'1':1,'alta':2,'2':2,'normal':3,'3':3,'':3,'baixa':4,'4':4,'minima':5,'mínima':5,'5':5};
-  return text.split('\n').map(raw=>{
-    const line=raw.trim();
-    if (!line||line.startsWith('#')) return null;
-    const parts=line.split('|').map(p=>p.trim());
-    const name=parts[0]; if(!name) return null;
-    const priRaw=(parts[1]||'').toLowerCase().trim();
-    const priority = PM[priRaw]!==undefined ? PM[priRaw] : 3;
-    let date=null, error=null;
-    const dr=(parts[2]||'').trim();
+  const PM = {
+    'critica':1,'crítica':1,'critical':1,'1':1,
+    'alta':2,'high':2,'2':2,
+    'normal':3,'3':3,'':3,
+    'baixa':4,'baja':4,'low':4,'4':4,
+    'minima':5,'mínima':5,'minimal':5,'5':5
+  };
+  return text.split('\n').map(raw => {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) return null;
+    const parts = line.split('|').map(p => p.trim());
+    const name = parts[0]; if (!name) return null;
+    const priRaw = (parts[1] || '').toLowerCase().trim();
+    const priority = PM[priRaw] !== undefined ? PM[priRaw] : 3;
+    let date = null, error = null;
+    const dr = (parts[2] || '').trim();
     if (dr) {
-      const dmy=dr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-      const ymd=dr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-      if (dmy) date=`${dmy[3]}-${dmy[2].padStart(2,'0')}-${dmy[1].padStart(2,'0')}`;
-      else if (ymd) date=dr;
-      else error=`Data no vàlida: "${dr}"`;
+      const dmy = dr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      const ymd = dr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (dmy)      date = `${dmy[3]}-${dmy[2].padStart(2,'0')}-${dmy[1].padStart(2,'0')}`;
+      else if (ymd) date = dr;
+      else          error = L().impDateErr(dr);
     }
-    return { name, priority, date, tag:(parts[3]||'').trim(), error };
+    return { name, priority, date, tag: (parts[3] || '').trim(), error };
   }).filter(Boolean);
 }
 
 function parseTxtAndPreview(text) {
+  const t = L();
   const parsed = parseTxt(text);
-  pendingImport = parsed.filter(p=>!p.error);
-  const total=parsed.length, valid=pendingImport.length, errs=parsed.filter(p=>p.error).length;
-  const PC=['','var(--urgent)','var(--warning)','var(--accent)','var(--border2)','var(--text-faint)'];
-  let listHtml='';
-  parsed.forEach(p=>{
-    listHtml+=`<div class="import-preview-item${p.error?' has-err':''}">
+  pendingImport = parsed.filter(p => !p.error);
+  const total = parsed.length, valid = pendingImport.length, errs = parsed.filter(p => p.error).length;
+  const PC = ['','var(--urgent)','var(--warning)','var(--accent)','var(--border2)','var(--text-faint)'];
+  let listHtml = '';
+  parsed.forEach(p => {
+    listHtml += `<div class="import-preview-item${p.error?' has-err':''}">
       <div class="ip-name">${esc(p.name)}</div>
       <div class="ip-meta">
         <span style="color:${PC[p.priority]}">P${p.priority}</span>
-        ${p.date?`<span>${formatDate(p.date)}</span>`:''}
-        ${p.tag?`<span>${esc(p.tag)}</span>`:''}
+        ${p.date  ? `<span>${formatDate(p.date)}</span>` : ''}
+        ${p.tag   ? `<span>${esc(p.tag)}</span>` : ''}
       </div>
-      ${p.error?`<div class="ip-err">⚠ ${esc(p.error)}</div>`:''}
+      ${p.error ? `<div class="ip-err">⚠ ${esc(p.error)}</div>` : ''}
     </div>`;
   });
-  document.getElementById('import-summary').innerHTML=
-    `Trobades <span class="import-count">${total}</span> línies — <span style="color:var(--done)">${valid} vàlides</span>${errs?` · <span style="color:var(--urgent)">${errs} amb error</span>`:''}`;
-  document.getElementById('import-preview-list').innerHTML=listHtml||'<div style="font-family:var(--font-mono);font-size:12px;color:var(--text-faint);text-align:center;padding:20px">Cap tasca trobada</div>';
-  document.getElementById('import-step1').style.display='none';
-  document.getElementById('import-step2').style.display='flex';
-  document.getElementById('import-step2').style.flexDirection='column';
-  document.getElementById('import-step2').style.gap='12px';
-  document.getElementById('btn-confirm-import').style.display=valid>0?'block':'none';
-  document.getElementById('btn-import-back').style.display='block';
+  document.getElementById('import-summary').innerHTML = t.impFoundFn(total, valid, errs);
+  document.getElementById('import-preview-list').innerHTML = listHtml ||
+    `<div style="font-family:var(--font-mono);font-size:12px;color:var(--text-faint);text-align:center;padding:20px">${t.impNoneFound}</div>`;
+  document.getElementById('import-step1').style.display = 'none';
+  document.getElementById('import-step2').style.display = 'flex';
+  document.getElementById('btn-confirm-import').style.display = valid > 0 ? 'block' : 'none';
+  document.getElementById('btn-import-back').style.display = 'block';
 }
 
 document.getElementById('btn-confirm-import').addEventListener('click', function() {
   if (!pendingImport.length) return;
-  const start=tasks.length;
-  pendingImport.forEach((p,i)=>tasks.push({ id:uid(), name:p.name, priority:p.priority, date:p.date, status:'pendent', tag:p.tag, notes:'', images:[], order:start+i }));
+  const start = tasks.length;
+  pendingImport.forEach((p,i) => tasks.push({
+    id: uid(), name: p.name, priority: p.priority, date: p.date,
+    status: 'pendent', tag: p.tag, notes: '', images: [], order: start + i
+  }));
   save(tasks); renderAll(); closeImportModal();
-  showToast(`✓ ${pendingImport.length} tasques importades`, 'success');
+  showToast(L().impImportedFn(pendingImport.length), 'success');
 });
 
-// ─── HELP ────────────────────────────────────────────────────────────────
+// ─── HELP ────────────────────────────────────────────────────
 function openHelpModal()  { document.getElementById('help-overlay').classList.add('open'); }
 function closeHelpModal() { document.getElementById('help-overlay').classList.remove('open'); }
 
-// ─── BACKUP ──────────────────────────────────────────────────────────────
+// ─── BACKUP ──────────────────────────────────────────────────
 function openBackupModal()  { document.getElementById('backup-overlay').classList.add('open'); }
 function closeBackupModal() { document.getElementById('backup-overlay').classList.remove('open'); }
 
 function exportJSON() {
-  const blob=new Blob([JSON.stringify(tasks,null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`tasques-copia-${todayStr()}.json`; a.click(); URL.revokeObjectURL(a.href);
-  showToast('⬇ Còpia exportada','success');
+  const blob = new Blob([JSON.stringify(tasks, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `tasques-copia-${todayStr()}.json`; a.click(); URL.revokeObjectURL(a.href);
+  showToast(L().exportMsg, 'success');
 }
 document.getElementById('import-json-input').addEventListener('change', function(e) {
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader(); r.onload=ev=>{
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader(); r.onload = ev => {
     try {
-      const imp=JSON.parse(ev.target.result);
-      if(!Array.isArray(imp)) throw 0;
-      if(!confirm(`Restaurar ${imp.length} tasques?\nLes tasques actuals seran substituïdes.`)) return;
-      tasks=imp; save(tasks); renderAll(); closeBackupModal();
-      showToast(`✓ ${imp.length} tasques restaurades`,'success');
-    } catch { showToast('❌ Fitxer no vàlid','error'); }
-  }; r.readAsText(f); this.value='';
+      const imp = JSON.parse(ev.target.result);
+      if (!Array.isArray(imp)) throw 0;
+      if (!confirm(L().confirmRestoreFn(imp.length))) return;
+      tasks = imp; save(tasks); renderAll(); closeBackupModal();
+      showToast(L().restoredFn(imp.length), 'success');
+    } catch { showToast(L().invalidFile, 'error'); }
+  }; r.readAsText(f); this.value = '';
 });
 function confirmClearAll() {
-  if(!confirm('Segur? Totes les tasques s\'esborraran. Exporta primer!\n\nAquesta acció no es pot desfer.')) return;
-  tasks=[]; save(tasks); renderAll(); closeBackupModal(); showToast('Totes les tasques esborrades','error');
+  if (!confirm(L().confirmClear)) return;
+  tasks = []; save(tasks); renderAll(); closeBackupModal();
+  showToast(L().clearedMsg, 'error');
 }
 
-// ─── TOAST ───────────────────────────────────────────────────────────────
+// ─── TOAST ───────────────────────────────────────────────────
 let toastTimer;
 function showToast(msg, type='') {
-  const el=document.getElementById('toast'); el.textContent=msg; el.className=type?`show ${type}`:'show';
-  clearTimeout(toastTimer); toastTimer=setTimeout(()=>{ el.className=el.className.replace('show','').trim(); },3200);
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = type ? `show ${type}` : 'show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = el.className.replace('show','').trim(); }, 3200);
 }
 
-// ─── FILTERS / SORT ──────────────────────────────────────────────────────
-document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',function(){
-  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.remove('active'));
-  this.classList.add('active'); currentFilter=this.dataset.filter; renderAll();
+// ─── FILTERS / SORT ──────────────────────────────────────────
+document.querySelectorAll('[data-filter]').forEach(btn => btn.addEventListener('click', function() {
+  document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+  this.classList.add('active'); currentFilter = this.dataset.filter; renderAll();
 }));
-document.querySelectorAll('[data-sort]').forEach(btn=>btn.addEventListener('click',function(){
-  document.querySelectorAll('[data-sort]').forEach(b=>b.classList.remove('active'));
-  this.classList.add('active'); currentSort=this.dataset.sort; renderAll();
+document.querySelectorAll('[data-sort]').forEach(btn => btn.addEventListener('click', function() {
+  document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+  this.classList.add('active'); currentSort = this.dataset.sort; renderAll();
 }));
-document.getElementById('search').addEventListener('input', function(){ searchQuery=this.value; renderAll(); });
+document.getElementById('search').addEventListener('input', function() { searchQuery = this.value; renderAll(); });
 
-// ─── BUTTONS ─────────────────────────────────────────────────────────────
+// ─── BUTTON EVENTS ───────────────────────────────────────────
 document.getElementById('btn-new').addEventListener('click', openNew);
 document.getElementById('btn-save').addEventListener('click', saveModal);
 document.getElementById('btn-cancel').addEventListener('click', closeModal);
-document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-close-btn').addEventListener('click', closeModal);
 document.getElementById('btn-delete').addEventListener('click', deleteFromModal);
-overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
-document.getElementById('import-overlay').addEventListener('click', e=>{ if(e.target.id==='import-overlay') closeImportModal(); });
-document.getElementById('help-overlay').addEventListener('click', e=>{ if(e.target.id==='help-overlay') closeHelpModal(); });
-document.getElementById('backup-overlay').addEventListener('click', e=>{ if(e.target.id==='backup-overlay') closeBackupModal(); });
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.getElementById('import-overlay').addEventListener('click', e => { if (e.target.id === 'import-overlay') closeImportModal(); });
+document.getElementById('help-overlay').addEventListener('click', e => { if (e.target.id === 'help-overlay') closeHelpModal(); });
+document.getElementById('backup-overlay').addEventListener('click', e => { if (e.target.id === 'backup-overlay') closeBackupModal(); });
 
 document.addEventListener('keydown', function(e) {
   const anyOpen = document.querySelector('.modal-overlay.open');
-  if (e.key==='Escape') {
-    if (document.getElementById('modal-overlay').classList.contains('open')) closeModal();
+  if (e.key === 'Escape') {
+    if (overlay.classList.contains('open')) closeModal();
     else if (document.getElementById('import-overlay').classList.contains('open')) closeImportModal();
     else if (document.getElementById('help-overlay').classList.contains('open')) closeHelpModal();
     else if (document.getElementById('backup-overlay').classList.contains('open')) closeBackupModal();
   }
-  if (e.key==='Enter' && e.ctrlKey && overlay.classList.contains('open')) saveModal();
+  if (e.key === 'Enter' && e.ctrlKey && overlay.classList.contains('open')) saveModal();
   const active = document.activeElement;
-  const typing = active.tagName==='INPUT'||active.tagName==='TEXTAREA'||active.contentEditable==='true';
+  const typing = active.tagName==='INPUT' || active.tagName==='TEXTAREA' || active.contentEditable==='true';
   if (!anyOpen && !typing) {
-    if (e.key==='n'||e.key==='N') openNew();
-    if (e.key==='?') openHelpModal();
+    if (e.key === 'n' || e.key === 'N') openNew();
+    if (e.key === '?') openHelpModal();
   }
 });
 
-// ─── UTILS ───────────────────────────────────────────────────────────────
-function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+// ─── UTILS ───────────────────────────────────────────────────
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────
+// ─── INIT ─────────────────────────────────────────────────────
 document.querySelector('[data-sort="priority"]').classList.add('active');
+applyI18N();
 renderAll();
 </script>
 </body>
