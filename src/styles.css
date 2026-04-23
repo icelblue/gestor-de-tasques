@@ -230,3 +230,47 @@
   background: var(--border);
   margin: 4px 0;
 }
+
+/* ====== Responsive layout ====== */
+.gt-content {
+  grid-template-columns: minmax(0, 1fr) 360px;
+}
+@media (max-width: 900px) {
+  .gt-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ====== Swipe-to-delete (mobile) ====== */
+.gt-swipe-row {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.gt-swipe-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 18px;
+  background: color-mix(in oklab, var(--urgent) 35%, var(--background));
+  color: var(--urgent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.gt-swipe-card {
+  position: relative;
+  will-change: transform;
+  transition: transform 220ms ease;
+}
+.gt-swipe-card.dragging {
+  transition: none;
+}
+
+@media (max-width: 640px) {
+  .gt-task-actions { display: none !important; }
+}
